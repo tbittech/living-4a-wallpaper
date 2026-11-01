@@ -1,0 +1,40 @@
+{
+  "source": "Gemini_Generated_Image_7viedn7viedn7vie.jpg",
+  "cell": [
+    5.374,
+    5.378
+  ],
+  "phase": [
+    0.02,
+    3.16
+  ],
+  "frame_size": [
+    40,
+    112
+  ],
+  "views": [
+    "front",
+    "three_quarter",
+    "side",
+    "back"
+  ],
+  "sizes": {
+    "front": [
+      38,
+      110
+    ],
+    "three_quarter": [
+      38,
+      110
+    ],
+    "side": [
+      37,
+      108
+    ],
+    "back": [
+      38,
+      110
+    ]
+  },
+  "colors": 24
+}

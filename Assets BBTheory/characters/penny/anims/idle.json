@@ -1,0 +1,20 @@
+{
+  "source": "idle.jpg",
+  "frames": 4,
+  "fps": 4,
+  "loop": true,
+  "frame_size": [
+    50,
+    112
+  ],
+  "anchor": [
+    23,
+    111
+  ],
+  "cell": 5.382,
+  "cell_forced": false,
+  "grid_quality": 0.52,
+  "keep_y": false,
+  "pick": "2,2,2,2",
+  "lower": 0
+}

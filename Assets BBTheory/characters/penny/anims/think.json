@@ -1,0 +1,20 @@
+{
+  "source": "think.jpg",
+  "frames": 4,
+  "fps": 4,
+  "loop": true,
+  "frame_size": [
+    47,
+    112
+  ],
+  "anchor": [
+    23,
+    111
+  ],
+  "cell": 5.382,
+  "cell_forced": false,
+  "grid_quality": 0.52,
+  "keep_y": false,
+  "pick": "2,3,4,3",
+  "lower": 0
+}

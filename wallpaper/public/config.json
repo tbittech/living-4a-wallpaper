@@ -1,0 +1,75 @@
+{
+  "_comment": "Configuración del wallpaper (ver WALLPAPER.md). Tiempos en segundos. Los parámetros de la URL pisan algunos (?leave=30, ?bg=day, ?fit=contain).",
+  "theme": "big_bang",
+  "server": "127.0.0.1:8765",
+  "_server": "A dónde se conecta la página cuando Lively la abre como archivo local (sin server.py no hay personajes, pero el fondo anda).",
+  "fps": 30,
+  "day_hours": [7.5, 19.5],
+  "processes": {
+    "_comment": "Quién está en el living (server/procs.py): cada every s se miran los procesos de Windows y de WSL (solo distros ya prendidas). windows: nombre del .exe -> source; scripts: script de node (o binario en WSL) -> source. Con el programa abierto el personaje se queda aunque no haga nada; si falta misses pasadas seguidas, se va.",
+    "enabled": true, "every": 3, "misses": 2, "wsl": true,
+    "windows": {"claude.exe": "claude", "codex.exe": "codex"},
+    "scripts": {"gemini": "gemini", "codex": "codex"}
+  },
+  "omniroute": {
+    "_comment": "server.py pide url cada every segundos: solo gateway_up / gateway_down (quién está lo deciden los procesos).",
+    "enabled": true, "url": "http://127.0.0.1:20128/api/health/ping", "every": 5, "timeout": 1.5,
+    "_calls": "server.py lee los call_logs nuevos cada calls_every s (calls.py): path -> quién (clients), última herramienta del input -> tool_call; sin requests en idle s -> turn_end. Solo mueven al personaje si su programa está abierto.",
+    "call_logs": "~/.omniroute/call_logs", "calls_every": 1, "idle": 20,
+    "clients": {"/v1/responses": "codex", ":generateContent": "gemini", ":streamGenerateContent": "gemini"}
+  },
+  "crossfade": 1.5,
+  "walk_speed": 2.5,
+  "fade": 0.5,
+  "min_dwell": 2,
+  "think_grace": 2.5,
+  "leave_after": 0,
+  "_leave_after": "Segundos sin eventos hasta que el personaje se va a su pieza (trabajando, 4 veces eso). 0: nunca, se queda mientras su programa esté abierto (lo decide el servidor). La demo usa demo_leave_after.",
+  "demo_leave_after": 180,
+  "home": {
+    "_comment": "Por dónde se va cada personaje cuando pasa un rato sin eventos (y por dónde vuelve). Al cerrar la sesión se va por la puerta.",
+    "sheldon": "hallway",
+    "leonard": "hallway",
+    "penny": "door"
+  },
+  "disputes": ["sheldon"],
+  "_disputes": "Quiénes reclaman su asiento (scene.owners) si lo encuentran ocupado: «ese es mi lugar» y el otro se cambia.",
+  "place_disputes": { "whiteboard": { "sheldon": ["penny"] } },
+  "_place_disputes": "Lugar compartido -> quién -> a quiénes echa: si lo encuentra ahí le pregunta qué hace y el otro se va a su asiento de reposo hasta que el lugar quede libre.",
+  "costumes": {
+    "_comment": "Disfraces de las escenas especiales: personaje -> nombre -> carpeta de characters/ en el bundle.",
+    "sheldon": { "flash": "sheldon_flash" },
+    "leonard": { "hobbit": "leonard_hobbit" }
+  },
+  "chatter": {
+    "_comment": "Globos de charla (sim/chatter.js). Al cruzarse caminando en el mismo carril: chance por encuentro; cooldown: global; pair_cooldown: por pareja; seconds: cuánto dura cada globo; reply_after: demora de la respuesta; reach: casillas de distancia. couch: sentados en el living (seats: asientos que se suman al sofá, el sillón de Leonard; solo_seats: donde también se habla solo; uno solo habla para sí, dos o tres se hablan de a dos); every: cada cuánto se sortea; settle: segundos sentado antes de hablar; solo_cooldown: por personaje. bump: choques (after: segundos esperando a que el otro libere la casilla; cooldown: por pareja). work: frase al llegar a la tarea (chance, delay s después de llegar, cooldown desde su última frase), otra cada every s con probabilidad again, greet: saludar al entrar (en sus primeros greet_within s; si entró por la puerta ya habló en greetTalk); reply_wait: segundos que espera la respuesta a un saludo de entrada/salida si el que contesta tiene otro globo; near: no habla si otro tiene globo a esas casillas.",
+    "enabled": true, "chance": 0.85, "cooldown": 15, "pair_cooldown": 40, "seconds": 2.8, "reply_after": 1.3, "reach": 2,
+    "couch": { "every": 10, "chance": 0.7, "cooldown": 22, "solo_cooldown": 40, "settle": 4,
+               "seats": ["armchair"], "solo_seats": ["kitchen_stool"] },
+    "bump": { "chance": 0.9, "after": 0.3, "cooldown": 25 },
+    "work": { "chance": 0.75, "delay": 1, "cooldown": 10, "every": 30, "again": 0.5, "near": 4, "greet": 0.8, "greet_within": 6 }
+  },
+  "scenes": {
+    "_comment": "after: segundos en reposo antes de que pueda pasar; chance: probabilidad en cada sorteo (cada 10 s); cooldown: segundos hasta que pueda repetirse. special_gap: segundos mínimos desde que termina una escena especial (Flash, Frodo) hasta que pueda arrancar otra. blanket.high: esfuerzos de Claude que cuentan como uso alto (trabaja todo el turno en el sillón con la manta).",
+    "special_gap": 240,
+    "wander": { "after": 45, "chance": 0.35, "stay": [5, 15], "places": ["kitchen", "window", "center"] },
+    "flash": { "after": 300, "chance": 0.25, "cooldown": 600, "speed": 12,
+               "route": [[10, 35], [16, 43], [10, 48], [1, 43], [0, 36], [6, 33], [10, 35]] },
+    "wii": { "who": ["sheldon"], "after": 60, "chance": 0.2, "cooldown": 600, "place": "tv", "throws": [2, 4] },
+    "blanket": { "who": ["sheldon"], "after": 60, "chance": 0.2, "cooldown": 600, "type": [[15, 45], [120, 360]],
+                 "high": ["high", "xhigh", "max"] },
+    "hobbit": { "after": 300, "chance": 0.25, "cooldown": 600, "jumps": [1, 2], "min_jump": 9 }
+  },
+  "tool_roles": {
+    "_comment": "Nombre de herramienta (en minúscula) -> rol. Lo que no está acá va a edit; mcp__* va a web.",
+    "bash": "shell", "shell": "shell", "exec": "shell", "run_command": "shell", "powershell": "shell",
+    "edit": "edit", "write": "edit", "multiedit": "edit", "notebookedit": "edit", "apply_patch": "edit", "replace": "edit",
+    "read": "read", "grep": "read", "glob": "read", "ls": "read", "list": "read", "search_files": "read",
+    "websearch": "web", "webfetch": "web", "web_search": "web", "web_fetch": "web",
+    "task": "think", "agent": "think", "todowrite": "think",
+    "exec_command": "shell", "run_shell_command": "shell", "write_stdin": "shell",
+    "write_file": "edit", "read_file": "read", "read_many_files": "read", "list_directory": "read", "grep_search": "read",
+    "search_file_content": "read", "view_image": "read", "google_web_search": "web", "js": "web",
+    "request_user_input": "think", "ask_user": "think", "invoke_agent": "think", "enter_plan_mode": "think"
+  }
+}

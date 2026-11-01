@@ -1,0 +1,40 @@
+{
+  "source": "reference.webp",
+  "cell": [
+    5.245,
+    5.245
+  ],
+  "phase": [
+    1.89,
+    0.83
+  ],
+  "frame_size": [
+    40,
+    112
+  ],
+  "views": [
+    "front",
+    "three_quarter",
+    "side",
+    "back"
+  ],
+  "sizes": {
+    "front": [
+      38,
+      110
+    ],
+    "three_quarter": [
+      35,
+      110
+    ],
+    "side": [
+      33,
+      110
+    ],
+    "back": [
+      36,
+      110
+    ]
+  },
+  "colors": 24
+}

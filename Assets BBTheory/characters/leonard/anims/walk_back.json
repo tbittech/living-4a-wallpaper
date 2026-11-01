@@ -1,0 +1,20 @@
+{
+  "source": "walk_back.jpg",
+  "frames": 4,
+  "fps": 8,
+  "loop": true,
+  "frame_size": [
+    42,
+    112
+  ],
+  "anchor": [
+    20,
+    111
+  ],
+  "cell": 5.378,
+  "cell_forced": false,
+  "grid_quality": 0.42,
+  "keep_y": false,
+  "pick": null,
+  "lower": 0
+}

@@ -1,0 +1,20 @@
+{
+  "source": "type.png",
+  "frames": 4,
+  "fps": 8,
+  "loop": true,
+  "frame_size": [
+    58,
+    112
+  ],
+  "anchor": [
+    38,
+    93
+  ],
+  "cell": 6.578,
+  "cell_forced": false,
+  "grid_quality": 0.08,
+  "keep_y": false,
+  "pick": null,
+  "lower": 18
+}

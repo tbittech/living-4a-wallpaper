@@ -1,0 +1,19 @@
+{
+  "source": "flash_run.webp",
+  "frames": 4,
+  "fps": 16,
+  "loop": true,
+  "frame_size": [
+    52,
+    112
+  ],
+  "anchor": [
+    24,
+    111
+  ],
+  "cell": 5.245,
+  "cell_forced": true,
+  "grid_quality": 0.02,
+  "keep_y": false,
+  "pick": "2,3,2,3"
+}

@@ -1,0 +1,7 @@
+{
+  "_comment": "Tema activo y temas que viven fuera de themes/ (ruta relativa a esta carpeta). Las herramientas aceptan --theme para usar otro.",
+  "theme": "breaking_bad",
+  "theme_paths": {
+    "big_bang": "../Assets BBTheory"
+  }
+}

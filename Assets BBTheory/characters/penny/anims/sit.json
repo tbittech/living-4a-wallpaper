@@ -1,0 +1,20 @@
+{
+  "source": "sit.jpg",
+  "frames": 4,
+  "fps": 4,
+  "loop": true,
+  "frame_size": [
+    57,
+    113
+  ],
+  "anchor": [
+    37,
+    112
+  ],
+  "cell": 5.376,
+  "cell_forced": false,
+  "grid_quality": 0.54,
+  "keep_y": false,
+  "pick": null,
+  "lower": 0
+}

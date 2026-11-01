@@ -1,0 +1,19 @@
+{
+  "source": "idle.webp",
+  "frames": 4,
+  "fps": 4,
+  "loop": true,
+  "frame_size": [
+    40,
+    112
+  ],
+  "anchor": [
+    20,
+    111
+  ],
+  "cell": 4.004,
+  "cell_forced": false,
+  "grid_quality": 0.52,
+  "keep_y": false,
+  "pick": "2,2,4,2"
+}

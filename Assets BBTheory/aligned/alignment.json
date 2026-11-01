@@ -1,0 +1,71 @@
+{
+  "night_idle": {
+    "source": "solitario-spider.jpg",
+    "source_size": [
+      1398,
+      752
+    ],
+    "matches": 592,
+    "inliers": 503,
+    "scale": 1.06154,
+    "rotation_deg": 0.0054,
+    "shift_px": [
+      -70.78,
+      -16.59
+    ],
+    "edge_corr_coarse": 0.9307,
+    "edge_corr_final": 0.9307,
+    "affine": [
+      [
+        1.061536,
+        -0.0001,
+        -70.78423
+      ],
+      [
+        0.0001,
+        1.061536,
+        -16.594451
+      ]
+    ]
+  },
+  "night_active": {
+    "source": "noche-con-amigos.jpg",
+    "source_size": [
+      1375,
+      768
+    ],
+    "matches": 663,
+    "inliers": 575,
+    "scale": 1.00041,
+    "rotation_deg": -0.0029,
+    "shift_px": [
+      0.11,
+      -0.1
+    ],
+    "edge_corr_coarse": 0.8683,
+    "edge_corr_final": 0.8683,
+    "affine": [
+      [
+        1.000413,
+        5e-05,
+        0.106572
+      ],
+      [
+        -5e-05,
+        1.000413,
+        -0.102571
+      ]
+    ]
+  },
+  "crop": {
+    "x": 2,
+    "y": 2,
+    "w": 1372,
+    "h": 764,
+    "reference": "solcito.jpg",
+    "reference_size": [
+      1376,
+      768
+    ]
+  }
+}

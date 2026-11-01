@@ -1,0 +1,40 @@
+{
+  "source": "penny.jpg",
+  "cell": [
+    5.376,
+    5.376
+  ],
+  "phase": [
+    0.14,
+    2.96
+  ],
+  "frame_size": [
+    47,
+    112
+  ],
+  "views": [
+    "front",
+    "three_quarter",
+    "side",
+    "back"
+  ],
+  "sizes": {
+    "front": [
+      45,
+      110
+    ],
+    "three_quarter": [
+      43,
+      110
+    ],
+    "side": [
+      37,
+      108
+    ],
+    "back": [
+      37,
+      110
+    ]
+  },
+  "colors": 24
+}

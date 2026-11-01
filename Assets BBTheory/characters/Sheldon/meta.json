@@ -1,0 +1,40 @@
+{
+  "source": "Gemini_Generated_Image_2wlgmg2wlgmg2wlg.jpg",
+  "cell": [
+    5.372,
+    5.374
+  ],
+  "phase": [
+    5.0,
+    2.91
+  ],
+  "frame_size": [
+    38,
+    112
+  ],
+  "views": [
+    "front",
+    "three_quarter",
+    "side",
+    "back"
+  ],
+  "sizes": {
+    "front": [
+      36,
+      110
+    ],
+    "three_quarter": [
+      35,
+      110
+    ],
+    "side": [
+      36,
+      108
+    ],
+    "back": [
+      35,
+      110
+    ]
+  },
+  "colors": 24
+}

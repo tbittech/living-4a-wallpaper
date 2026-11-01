@@ -1,0 +1,19 @@
+{
+  "source": "write.webp",
+  "frames": 4,
+  "fps": 6,
+  "loop": true,
+  "frame_size": [
+    55,
+    112
+  ],
+  "anchor": [
+    21,
+    111
+  ],
+  "cell": 4.004,
+  "cell_forced": false,
+  "grid_quality": 0.48,
+  "keep_y": false,
+  "pick": null
+}

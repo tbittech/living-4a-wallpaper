@@ -1,0 +1,20 @@
+{
+  "source": "read.jpg",
+  "frames": 4,
+  "fps": 4,
+  "loop": true,
+  "frame_size": [
+    54,
+    114
+  ],
+  "anchor": [
+    32,
+    113
+  ],
+  "cell": 5.376,
+  "cell_forced": false,
+  "grid_quality": 0.62,
+  "keep_y": false,
+  "pick": null,
+  "lower": 0
+}

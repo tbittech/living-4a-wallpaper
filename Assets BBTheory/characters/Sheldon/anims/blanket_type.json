@@ -1,0 +1,22 @@
+{
+  "source": "blanket.webp",
+  "frames": 4,
+  "fps": 6,
+  "loop": true,
+  "frame_size": [
+    81,
+    114
+  ],
+  "anchor": [
+    57,
+    113
+  ],
+  "cell": 2.0,
+  "cell_forced": false,
+  "grid_quality": null,
+  "keep_y": false,
+  "pick": null,
+  "lower": 0,
+  "shift": 0,
+  "script": "blanket_sheet.py"
+}

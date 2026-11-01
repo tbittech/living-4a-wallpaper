@@ -1,0 +1,20 @@
+{
+  "source": "knock.png",
+  "frames": 3,
+  "fps": 6,
+  "loop": false,
+  "frame_size": [
+    56,
+    112
+  ],
+  "anchor": [
+    24,
+    111
+  ],
+  "cell": 6.909,
+  "cell_forced": true,
+  "grid_quality": 0.02,
+  "keep_y": false,
+  "pick": null,
+  "lower": 0
+}

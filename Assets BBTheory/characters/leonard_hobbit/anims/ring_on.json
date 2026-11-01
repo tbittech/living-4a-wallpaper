@@ -1,0 +1,20 @@
+{
+  "source": "ring_on.png",
+  "frames": 4,
+  "fps": 4,
+  "loop": false,
+  "frame_size": [
+    50,
+    108
+  ],
+  "anchor": [
+    24,
+    107
+  ],
+  "cell": 7.528,
+  "cell_forced": true,
+  "grid_quality": 0.01,
+  "keep_y": false,
+  "pick": null,
+  "lower": 0
+}

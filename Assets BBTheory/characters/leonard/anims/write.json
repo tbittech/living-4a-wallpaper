@@ -1,0 +1,20 @@
+{
+  "source": "write.jpg",
+  "frames": 4,
+  "fps": 6,
+  "loop": true,
+  "frame_size": [
+    54,
+    112
+  ],
+  "anchor": [
+    21,
+    111
+  ],
+  "cell": 5.386,
+  "cell_forced": false,
+  "grid_quality": 0.34,
+  "keep_y": false,
+  "pick": "4,4,4,4",
+  "lower": 0
+}

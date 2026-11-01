@@ -1,0 +1,20 @@
+{
+  "source": "walk.jpg",
+  "frames": 4,
+  "fps": 8,
+  "loop": true,
+  "frame_size": [
+    52,
+    112
+  ],
+  "anchor": [
+    25,
+    111
+  ],
+  "cell": 5.38,
+  "cell_forced": false,
+  "grid_quality": 0.56,
+  "keep_y": false,
+  "pick": null,
+  "lower": 0
+}

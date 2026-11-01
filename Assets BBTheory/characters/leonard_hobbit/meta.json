@@ -1,0 +1,40 @@
+{
+  "source": "reference.jpg",
+  "cell": [
+    6.3,
+    6.3
+  ],
+  "phase": [
+    4.33,
+    1.9
+  ],
+  "frame_size": [
+    52,
+    108
+  ],
+  "views": [
+    "front",
+    "three_quarter",
+    "side",
+    "back"
+  ],
+  "sizes": {
+    "front": [
+      45,
+      104
+    ],
+    "three_quarter": [
+      41,
+      104
+    ],
+    "side": [
+      35,
+      106
+    ],
+    "back": [
+      50,
+      104
+    ]
+  },
+  "colors": 24
+}

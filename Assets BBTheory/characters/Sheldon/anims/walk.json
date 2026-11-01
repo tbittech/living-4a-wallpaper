@@ -1,0 +1,23 @@
+{
+  "source": "walk8.png",
+  "frames": 4,
+  "fps": 8,
+  "loop": true,
+  "frame_size": [
+    51,
+    112
+  ],
+  "anchor": [
+    24,
+    111
+  ],
+  "cell": 4.009,
+  "cell_forced": true,
+  "grid_quality": 0.02,
+  "keep_y": false,
+  "pick": null,
+  "lower": 0,
+  "shift": 0,
+  "cycle": "walk_from_leonard.py",
+  "arms": "walk_arms.py"
+}

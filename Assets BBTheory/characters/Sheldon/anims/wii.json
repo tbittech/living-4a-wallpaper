@@ -1,0 +1,21 @@
+{
+  "source": "wii_row.png",
+  "frames": 16,
+  "fps": 6,
+  "loop": true,
+  "frame_size": [
+    57,
+    112
+  ],
+  "anchor": [
+    28,
+    111
+  ],
+  "cell": 2.418,
+  "cell_forced": true,
+  "grid_quality": 0.02,
+  "keep_y": false,
+  "pick": null,
+  "lower": 0,
+  "shift": 0
+}

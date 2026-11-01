@@ -1,0 +1,20 @@
+{
+  "source": "celebrate.png",
+  "frames": 4,
+  "fps": 8,
+  "loop": false,
+  "frame_size": [
+    64,
+    120
+  ],
+  "anchor": [
+    31,
+    119
+  ],
+  "cell": 6.036,
+  "cell_forced": true,
+  "grid_quality": 0.01,
+  "keep_y": true,
+  "pick": null,
+  "lower": 0
+}

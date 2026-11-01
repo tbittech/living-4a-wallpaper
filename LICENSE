@@ -1,0 +1,36 @@
+MIT License (code only — see "Artwork" below)
+
+Copyright (c) 2026 tbittech
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of the source code in this repository (Python, JavaScript, PowerShell, batch
+and JSON configuration files) to deal in it without restriction, including
+without limitation the rights to use, copy, modify, merge, publish,
+distribute, sublicense, and/or sell copies, and to permit persons to whom it
+is furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in
+all copies or substantial portions of the code.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+
+-------------------------------------------------------------------------------
+Artwork (NOT covered by the MIT license)
+
+The images (sprites, sprite sheets, atlases, backgrounds, layers, props and
+the exported bundle in wallpaper/public/bundle/) are non-commercial fan art.
+The characters Sheldon Cooper, Leonard Hofstadter and Penny, and "The Big Bang
+Theory", are trademarks and copyrighted works of their respective owners
+(Warner Bros. Entertainment / Chuck Lorre Productions / CBS). This project is
+not affiliated with, endorsed or sponsored by them.
+
+You may use the artwork only for personal, non-commercial purposes (for
+example, as your own desktop wallpaper). Do not sell it or use it in
+commercial products. If you are a rights holder and want something removed,
+open an issue and it will be taken down.

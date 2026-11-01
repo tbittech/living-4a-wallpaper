@@ -1,0 +1,20 @@
+{
+  "source": "argue.png",
+  "frames": 4,
+  "fps": 6,
+  "loop": true,
+  "frame_size": [
+    60,
+    107
+  ],
+  "anchor": [
+    28,
+    106
+  ],
+  "cell": 6.57,
+  "cell_forced": false,
+  "grid_quality": 0.03,
+  "keep_y": false,
+  "pick": null,
+  "lower": 0
+}
