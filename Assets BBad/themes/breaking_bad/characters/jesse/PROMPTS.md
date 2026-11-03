@@ -42,8 +42,10 @@ Arms swing opposite to the legs, the hoodie strings bounce.
 
 **idle**
 ```
-3/4 view facing down-right, standing still with arms at his sides, subtle breathing loop
-(shoulders rise 1 pixel in frames 2-3), in frame 4 he scratches the back of his neck.
+3/4 view facing down-right, standing, head slightly bowed, lighting a cigarette: frame 1 cigarette
+in his mouth, both hands cupped in front of his face holding a lighter, frame 2 small orange lighter
+flame between his cupped hands, frame 3 lighter away, he takes a drag (cigarette tip glows orange),
+frame 4 hand lowered holding the cigarette, a small puff of grey smoke near his mouth.
 ```
 
 **wave**

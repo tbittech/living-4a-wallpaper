@@ -81,12 +81,13 @@
       "costumes": {},
       "chatter": {
         "enabled": true, "chance": 0.85, "cooldown": 15, "pair_cooldown": 40, "seconds": 2.8, "reply_after": 1.3, "reach": 2,
-        "couch": { "every": 10, "chance": 0.7, "cooldown": 22, "solo_cooldown": 40, "settle": 4, "seats": [], "solo_seats": [] },
+        "couch": { "group": "rest", "every": 10, "chance": 0.7, "cooldown": 22, "solo_cooldown": 40, "settle": 4, "seats": [], "solo_seats": [] },
         "bump": { "chance": 0.9, "after": 0.3, "cooldown": 25 },
         "work": { "chance": 0.75, "delay": 1, "cooldown": 10, "every": 30, "again": 0.5, "near": 4, "greet": 0.8, "greet_within": 6 }
       },
       "scenes": {
         "special_gap": 240,
+        "highfive": { "who": ["walter", "jesse"], "after": 20, "chance": 0.25, "cooldown": 600 },
         "wander": { "after": 45, "chance": 0.35, "stay": [5, 15], "places": ["window", "center", "barrels"] }
       }
     }

@@ -7,7 +7,8 @@
 
 import { key } from "../grid.js";
 import { greetTalk } from "./chatter.js";
-import { blanket, blanketOff, flash, flashHome, frodo, frodoHome, placeDispute, playWii, seatDispute, wander } from "./scenes.js";
+import { blanket, blanketOff, flash, flashHome, frodo, frodoHome, highFive, highFiveEnd, placeDispute, playWii, seatDispute,
+         wander } from "./scenes.js";
 
 const ROLE_STATE = { rest: "IDLE", think: "THINKING" };
 const WALK = { three_quarter: "walk", back: "walk_back" };
@@ -671,6 +672,9 @@ export class Character {
     if (wii && resting > wii.after && now >= (this.cooldowns.wii ?? 0) && Math.random() < wii.chance && this.startWii()) return;
     const bl = sc.blanket;
     if (bl && resting > bl.after && now >= (this.cooldowns.blanket ?? 0) && Math.random() < bl.chance && this.startBlanket()) return;
+    const hf = sc.highfive;
+    if (hf && gapOk && resting > hf.after && now >= (this.cooldowns.highfive ?? 0) && Math.random() < hf.chance
+        && this.startHighFive()) return;
     if (resting > sc.wander.after && Math.random() < sc.wander.chance) {
       this.startScript(wander(this));
       this.script.kind = "wander";   // en el paseo se puede charlar al cruzarse (chatter.js)
@@ -698,6 +702,21 @@ export class Character {
     if (!this.world.b.seats.couch?.includes(this.targetKey)) return false;
     if (!hold) this.cooldowns.blanket = this.world.now + cfg.cooldown;
     this.startScript(blanket(this, Math.random, hold), !hold, blanketOff);
+    return true;
+  }
+
+  /**
+   * Choque de cinco (scenes.highfive, Breaking Bad): lo arranca who[0] (Walter) si who[1] (Jesse) también está
+   * descansando. Es una especial: una sola a la vez y sin charla de fondo. Un evento a cualquiera de los dos la corta.
+   */
+  startHighFive() {
+    const cfg = this.config.scenes.highfive;
+    if (!cfg || cfg.who[0] !== this.id || !this.present || this.script || this.world.special) return false;
+    const other = this.world.chars.find((c) => c.id === cfg.who[1]);
+    if (!other?.present || other.script || other.leaving || other.state !== "IDLE" || other.role !== "rest" || !other.arrived) return false;
+    this.world.special = this;
+    this.cooldowns.highfive = this.world.now + cfg.cooldown;
+    this.startScript(highFive(this, other), true, highFiveEnd);
     return true;
   }
 

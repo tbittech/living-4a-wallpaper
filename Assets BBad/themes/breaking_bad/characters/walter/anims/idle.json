@@ -1,18 +1,21 @@
 {
-  "source": "code",
+  "source": "idle.jpg",
   "frames": 4,
   "fps": 3,
   "loop": true,
   "frame_size": [
     34,
-    58
+    57
   ],
   "anchor": [
     17,
-    57
+    56
   ],
+  "cell": 11.528,
+  "cell_forced": false,
+  "grid_quality": 0.3,
   "keep_y": false,
-  "pick": null,
+  "pick": "2,3,2,4",
   "lower": 0,
   "shift": 0
 }

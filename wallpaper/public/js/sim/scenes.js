@@ -146,6 +146,83 @@ export function* wander(ch, rand = Math.random) {
   }
 }
 
+/**
+ * Breaking Bad: Walter y Jesse se paran uno frente al otro, Jesse pregunta cuánto le toca a cada uno y pide
+ * chocar los cinco; Walter se da vuelta y se niega, Jesse insiste y al final Walter choca. Walter lleva el guion
+ * (las frases y la mano de los dos); Jesse solo camina a su casilla y espera. Si a Jesse lo corta un evento, termina.
+ */
+export function* highFive(ch, other) {
+  const w = ch.world;
+  const spot = pairSpot(w, ch, other);
+  if (!spot) return;
+  const [a, b] = spot;
+  const st = { done: false };
+  ch.highFive = st;
+  other.startScript(highFiveWait(other, b, st));
+  const js = other.script;
+  yield { kind: "walk", to: `@${a[0]},${a[1]}/down_right` };
+  const ready = () => other.arrived && !other.step && other.tile[0] === b[0] && other.tile[1] === b[1];
+  yield { kind: "until", cond: () => ready() || other.script !== js, timeout: 12 };
+  const on = () => other.present && other.script === js;
+  const say = (c, text, s = 2.6) => (c.say = { text, until: w.now + s });
+  const hand = (c) => c.setAnim(c.anims.wave ? "wave" : c.standAnim(false));
+  const lines = [
+    [0, () => say(other, "¿Cuánto es para cada uno, viejo?"), 2.8],
+    [0, () => say(ch, "Seiscientos mil. Cada uno."), 2.8],
+    [0, () => { say(other, "¡Yeah, bitch! ¡Chocala!"); hand(other); }, 2.2],
+    ["up_left", () => say(ch, "No hago eso, Jesse."), 2.6],
+    [0, () => say(other, "Dale, viejo. No me deje colgado."), 2.8],
+    [0, () => say(ch, "...", 1.4), 1.8],
+    ["down_right", () => say(ch, "Está bien. Una vez.", 1.6), 1.7],
+  ];
+  for (const [face, fn, wait] of lines) {
+    if (!on()) break;
+    if (face) yield { kind: "face", facing: face };
+    yield { kind: "call", fn };
+    yield { kind: "wait", seconds: wait };
+  }
+  if (on()) {
+    hand(ch);
+    yield { kind: "wait", seconds: 0.35 };
+    // ¡Paf! Destello entre las dos manos, a la altura de la cabeza
+    yield { kind: "call", fn: () => {
+      const box = ch.box ?? [0, ch.foot[1] - 100, 0, ch.foot[1]];
+      const x = Math.round((ch.foot[0] + other.foot[0]) / 2), y = Math.round(box[1] + (box[3] - box[1]) * 0.3);
+      w.fx.push({ kind: "glint", t0: w.now, x, y });
+      say(other, "¡Yeah, ciencia, bitch!", 2.4);
+    } };
+    yield { kind: "wait", seconds: 2.6 };
+  }
+  st.done = true;
+  ch.highFive = null;
+}
+
+/** Jesse en el choque de cinco: va a su casilla, mira a Walter y espera a que termine. */
+function* highFiveWait(ch, tile, st) {
+  yield { kind: "walk", to: `@${tile[0]},${tile[1]}/up_left` };
+  yield { kind: "until", cond: () => st.done, timeout: 30 };
+}
+
+/** Si cortan a Walter, Jesse no se queda esperando. */
+export function* highFiveEnd(ch) {
+  if (ch.highFive) ch.highFive.done = true;
+  ch.highFive = null;
+}
+
+/** Dos casillas libres en la misma fila (b GAP a la derecha de a: los sprites son más anchos que una casilla). */
+const GAP = 3;
+function pairSpot(w, ch, other) {
+  const c = w.place("center").tile;
+  const blocked = w.blockedTiles(ch);
+  blocked.delete(key(...other.tile));
+  const ok = (t) => w.grid.walkable.has(key(...t)) && !blocked.has(key(...t));
+  for (const [da, db] of [[0, -2], [0, -1], [0, -3], [-1, -2], [1, -2], [0, 0], [-1, -1], [1, -1], [0, -4]]) {
+    const a = [c[0] + da, c[1] + db], b = [a[0], a[1] + GAP];
+    if (ok(a) && ok(b)) return [a, b];
+  }
+  return null;
+}
+
 /** Sheldon juega al bowling de la Wii: se para detrás de la tele (le tapa las piernas), de frente, unas tiradas. */
 export function* playWii(ch, rand = Math.random) {
   const cfg = ch.config.scenes.wii;

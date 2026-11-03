@@ -87,6 +87,7 @@ if (params.has("demo") || (debug && !params.has("ref"))) {
     w: () => sel()?.present && !sel().script && sel().startScript(wander(sel())),
     g: () => world.chars.find((c) => config.scenes.wii?.who.includes(c.id))?.startWii(),
     m: () => world.chars.find((c) => config.scenes.blanket?.who.includes(c.id))?.startBlanket(),
+    c: () => world.chars.find((c) => c.id === config.scenes.highfive?.who[0])?.startHighFive(),
   });
 }
 if (!params.has("demo") && !params.has("ref")) {

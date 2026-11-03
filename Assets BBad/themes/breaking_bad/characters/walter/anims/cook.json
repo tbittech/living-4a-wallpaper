@@ -1,0 +1,21 @@
+{
+  "source": "cook.jpg",
+  "frames": 4,
+  "fps": 5,
+  "loop": true,
+  "frame_size": [
+    34,
+    58
+  ],
+  "anchor": [
+    16,
+    57
+  ],
+  "cell": 11.464,
+  "cell_forced": false,
+  "grid_quality": 0.5,
+  "keep_y": false,
+  "pick": null,
+  "lower": 0,
+  "shift": 0
+}

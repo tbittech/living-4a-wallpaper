@@ -24,6 +24,8 @@ POSES = {"walk": "Sheldon/source/walk.webp", "walk_back": "Sheldon/source/walk_b
          "think": "Sheldon/source/think.webp", "look": "Sheldon/source/write.webp",
          "cook": "Sheldon/source/read.webp", "celebrate": "penny/source/celebrate.png",
          "argue": "penny/source/argue.png"}
+# Pose propia de un personaje (Jesse prende un pucho en el idle: manos a la cara)
+POSES_BY = {("jesse", "idle"): "Sheldon/source/think.webp"}
 
 
 def block(text, title):
@@ -42,19 +44,21 @@ def main():
     ap.add_argument("--pose", help="hoja de pose de referencia (por defecto la de Big Bang)")
     ap.add_argument("--extra", default="", help="texto que se agrega al final del prompt")
     ap.add_argument("--tag", default="", help="sufijo del archivo de salida (otro intento)")
+    ap.add_argument("--models", default="Imagen", help="modelos o combo de OmniRoute (Imagen: round-robin entre cuentas)")
     a = ap.parse_args()
     d = HERE / "characters" / a.character
     text = (d / "PROMPTS.md").read_text(encoding="utf-8")
     prompt = block(text, "Base") + "\n" + block(text, a.anim) + ("\n" + a.extra if a.extra else "")
     refs = [str(d / "source" / SHEETS[a.character])]
-    pose = a.pose or (str(BBT / POSES[a.anim]) if a.anim in POSES else None)
+    pose = POSES_BY.get((a.character, a.anim)) or POSES.get(a.anim)
+    pose = a.pose or (str(BBT / pose) if pose else None)
     if pose:
         refs.append(pose)
     out = d / "source" / (a.anim + (f"_{a.tag}" if a.tag else ""))
     # -File no arma arreglos: -Command con las rutas entre comillas simples y el prompt por variable de entorno
     q = lambda x: "'" + str(x).replace("'", "''") + "'"
     cmd = ["powershell", "-NoProfile", "-ExecutionPolicy", "Bypass", "-Command",
-           f"& {q(SCRIPT)} -Prompt $env:GEN_PROMPT -Ref {','.join(q(r) for r in refs)} -Out {q(out)}; exit $LASTEXITCODE"]
+           f"& {q(SCRIPT)} -Prompt $env:GEN_PROMPT -Ref {','.join(q(r) for r in refs)} -Out {q(out)} -Models {','.join(q(m) for m in a.models.split(','))} -TimeoutSec 540; exit $LASTEXITCODE"]
     os.environ["GEN_PROMPT"] = prompt
     sys.exit(subprocess.run(cmd).returncode)
 

@@ -82,5 +82,5 @@ export function bindKeys(demo, getSource, setSource, sources, toggles) {
     else if (pick[k] && sources.includes(pick[k])) setSource(pick[k]);
     else if (toggles[k]) toggles[k]();
   });
-  return "1 shell · 2 edit · 3 read · 4 web · R pensar · T fin de turno · N entrar · X salir · A auto · S/L/P personaje · F Flash · H Frodo · W pasear · G Wii · M manta · D debug";
+  return "1 shell · 2 edit · 3 read · 4 web · R pensar · T fin de turno · N entrar · X salir · A auto · S/L/P personaje · F Flash · H Frodo · W pasear · G Wii · M manta · C chocala · D debug";
 }

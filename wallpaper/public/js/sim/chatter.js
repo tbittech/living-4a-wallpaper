@@ -14,7 +14,7 @@
 //
 // Sofá: sentados un rato en el living (couch.seats: el sofá y el sillón individual de Leonard), si hay uno
 // solo dice algo para sí (SOLO; también en solo_seats, como la banqueta de Penny); si hay dos o tres, dos
-// se hablan (COUCH). Sorteo cada couch.every s.
+// se hablan (COUCH). Sorteo cada couch.every s. En la van no hay sofá: couch.group "rest" usa los lugares de reposo.
 //
 // Trabajo: al llegar al lugar de su rol (pensar, pizarrón, compu, cómic, telescopio) dice algo de la tarea
 // (WORK), y cada work.every s en el mismo lugar, otra con probabilidad work.again. Sheldon con la manta
@@ -65,6 +65,47 @@ export const LINES = {
     ["¿Te hago una sopita?", "Solo si estoy enfermo. No lo estoy."],
     ["¡Bazinga!", "Esa es mía. Tiene derechos."],
   ],
+  // Breaking Bad (la van)
+  "walter>jesse": [
+    ["Jesse. Tenemos que cocinar.", "¡Ya voy, viejo, la puta madre!"],
+    ["Pureza 99,1 %. Ni un punto menos.", "Sí, sí. ¡Ciencia, bitch!"],
+    ["Jesse, nada de Chili P.", "¡Es mi firma, viejo!"],
+    ["¿Cómo abrimos el depósito?", "¡Imanes, bitch! ¡Imanes!"],
+    ["¿Te lavaste las manos?", "Llevo guantes, yo. Relajá."],
+    ["Pinkman. Hacé silencio.", "Ni hablé, Señor White."],
+  ],
+  "jesse>walter": [
+    ["¡Yo, Señor White!", "No me digas «yo». Hola, Jesse."],
+    ["¿Ya podemos cobrar, viejo?", "Cuando la pureza lo diga."],
+    ["¿Pollos Hermanos? Muero de hambre.", "Ahí no. Nunca más."],
+    ["¿Y si lo cortamos un poquito?", "Jamás. Nosotros no cortamos."],
+    ["Viejo, usted me da miedo.", "Bien. Así funciona esto."],
+  ],
+  "walter>saul": [
+    ["Saul. Necesito un abogado.", "No: un abogado *criminal*."],
+    ["Decí mi nombre.", "¿Heisenberg? ¡Bajá la voz!"],
+    ["¿Lavaste el dinero?", "Más limpio que tu pelada, Walt."],
+    ["¿Cuánto me cobrás por esto?", "Para vos, el doble. Amistad."],
+  ],
+  "saul>walter": [
+    ["Tengo un tipo para eso.", "Siempre tenés un tipo."],
+    ["¿Y si te vas a Nebraska?", "No me voy a ningún lado."],
+    ["Walt, bajá un cambio.", "Yo no bajo nada. Yo golpeo."],
+    ["¿Y el lavadero de autos?", "Lo maneja Skyler. Ni preguntes."],
+    ["¡Mejor llamá a Saul!", "Te estoy viendo, Saul."],
+  ],
+  "jesse>saul": [
+    ["Saul, me debés guita, bitch.", "Son honorarios, Pinkman."],
+    ["¿Sos abogado de verdad?", "Diploma de Samoa. Vale igual."],
+    ["¿Dónde está mi plata, yo?", "En un lugar seguro. Confiá."],
+    ["¿Y Huell? ¿Lo dejaste afuera?", "Huell no se mueve. Nunca."],
+  ],
+  "saul>jesse": [
+    ["Pinkman, ¿qué hiciste ahora?", "¡Nada, yo! Fue Badger."],
+    ["Ey, Captain Cook.", "No me digas así, viejo."],
+    ["¿Otra vez con Badger y Skinny?", "Son buenos pibes, yo."],
+    ["Te consigo un abogado: yo.", "¿Y cuánto me sale, bitch?"],
+  ],
 };
 
 /** Sentado solo en el sofá: frases para sí mismo. */
@@ -97,6 +138,34 @@ export const SOLO = {
     "Turno doble en el Cheesecake. Ugh.",
     "¿Comida tailandesa otra vez? Dale.",
     "Mañana audición. ¡Esta es la mía!",
+  ],
+  walter: [
+    "Yo soy el que golpea la puerta.",
+    "No estoy en peligro. Soy el peligro.",
+    "Decí mi nombre.",
+    "Todo esto, por mi familia.",
+    "Gray Matter... me robaron todo.",
+    "Lo hice por mí. Me gustaba.",
+    "Un hombre provee. Y punto.",
+    "Química: el estudio del cambio.",
+  ],
+  jesse: [
+    "Yeah, ciencia, bitch!",
+    "Quiero un kart. O un láser tag.",
+    "Badger me debe guita, yo.",
+    "Cocinar con este viejo... uf.",
+    "Otro pucho y arranco.",
+    "Esta van huele a muerte, yo.",
+    "Mr. White está re loco, bitch.",
+  ],
+  saul: [
+    "S'all good, man.",
+    "¿Huell? ¿Dónde se metió?",
+    "El teléfono no para. Bien.",
+    "El de las aspiradoras... por si acaso.",
+    "Cinnabon en Omaha... ni loco.",
+    "Hoy no me demanda nadie. Raro.",
+    "Mi oficina tiene columnas. Clase.",
   ],
 };
 
@@ -146,6 +215,35 @@ export const COUCH = {
     ["¿Por qué Sheldon es así?", "Su mamá dice que lo testearon."],
     ["Ese sillón es tuyo, ¿no?", "El único lugar sin dueño: Sheldon."],
   ],
+  "walter>jesse": [
+    ["¿Sabés qué es la química?", "¿Lo que hacemos? ¿Cocinar?"],
+    ["Hoy cocinamos 50 libras.", "¿50? ¿Está loco, viejo?"],
+    ["No fumes adentro de la van.", "Es un pucho normal, yo."],
+    ["Respetá la química, Jesse.", "La respeto. Re la respeto."],
+  ],
+  "jesse>walter": [
+    ["¿Y si dejamos esto, viejo?", "Esto termina cuando yo diga."],
+    ["¿Extraña dar clases?", "Ni un poco. Bueno... un poco."],
+    ["Señor White, ¿somos amigos?", "Somos socios. Es mejor."],
+    ["Me aburro. ¿Jugamos a algo?", "La química no es un juego."],
+  ],
+  "walter>saul": [
+    ["¿Cuánto ganamos hoy?", "Neto, después de mi 5 %: mucho."],
+    ["Necesito un auto nuevo.", "Tengo un tipo en el lavadero."],
+  ],
+  "saul>walter": [
+    ["Walt, ¿te pongo en mi aviso?", "Ni en tus sueños, Saul."],
+    ["¿Querés un abogado o un amigo?", "Un abogado. Barato."],
+    ["Esto me recuerda a Cicero.", "No sé qué es Cicero, Saul."],
+  ],
+  "jesse>saul": [
+    ["¿Me hacés un descuento?", "Sí: 10 % extra. Cariño."],
+    ["Vos sos re turbio, viejo.", "Turbio no. Creativo."],
+  ],
+  "saul>jesse": [
+    ["Chico, invertí en un lavadero.", "Prefiero un láser tag, yo."],
+    ["¿Viste mi aviso en la tele?", "El de la Constitución inflable."],
+  ],
 };
 
 /** Choque: "el que espera>el que tapa": [frase, respuesta]. */
@@ -187,6 +285,37 @@ export const BUMP = {
     ["Correte, enano. Es chiste.", "Ja. Ja. Muy graciosa."],
     ["Choque y fuga, Leonard.", "Te denuncio al edificio."],
     ["¿Me estás siguiendo?", "¡No! Bueno... un poco."],
+  ],
+  "walter>jesse": [
+    ["Jesse. Estás en mi camino.", "Uy, perdón, Señor White."],
+    ["Correte, imbécil.", "¡Tranqui, viejo! ¡Ya voy!"],
+    ["Jesse, despejá el área.", "¿Qué área? ¡Es una van!"],
+    ["No me toques el matraz.", "Ni lo toqué, yo."],
+    ["Pisá con cuidado, Jesse.", "Ok, ok... qué intenso, bitch."],
+  ],
+  "jesse>walter": [
+    ["¡Yo! ¿Me deja pasar?", "Cuando dejes de decir «yo»."],
+    ["¡Viejo, casi tiro todo!", "Casi. Por eso cocino yo."],
+    ["Correte, Heisenberg, bitch.", "Cuidado, Jesse. Pisá despacio."],
+    ["¡La concha de...! ¡Me pisó!", "Fue un accidente. Seguí."],
+  ],
+  "walter>saul": [
+    ["Saul. Afuera.", "Ok, ok. No toques el traje."],
+    ["Correte, Goodman.", "Con gusto. Factura aparte."],
+  ],
+  "saul>walter": [
+    ["¡Walt! Me arrugás el traje.", "Es un traje feo, Saul."],
+    ["Permiso, cliente estrella.", "No soy tu cliente estrella."],
+    ["Ojo, que esto es demanda.", "Demandame. Te pago yo."],
+  ],
+  "jesse>saul": [
+    ["¡Correte, Saul, bitch!", "Esto te sale 50 dólares."],
+    ["¡Yo! Me pisaste.", "Te recomiendo un abogado."],
+  ],
+  "saul>jesse": [
+    ["Pinkman, ojo con el traje.", "Ese traje es horrible, yo."],
+    ["Ey, chico, abrime paso.", "¿Y qué gano yo, viejo?"],
+    ["Esto se arregla con plata.", "Todo con vos es plata."],
   ],
 };
 
@@ -291,6 +420,98 @@ export const WORK = {
       "¿Hay wifi en el espacio?",
     ],
   },
+  walter: {
+    shell: [
+      "No es cocinar. Es química.",
+      "Respeten la química.",
+      "Pureza: 99,1 %. Azul.",
+      "Mi producto es el mejor. Punto.",
+      "Temperatura justa. Como siempre.",
+    ],
+    edit: [
+      "Anoto la reacción. Precisa.",
+      "Un error y volamos todos.",
+      "Notas de laboratorio. En orden.",
+      "Gray Matter era mío también.",
+    ],
+    read: [
+      "Whitman. «Para mi otro W. W.»",
+      "Metilamina: alcanza. Por ahora.",
+      "Revisando el inventario...",
+      "Hojas de hierba... hermoso.",
+    ],
+    think: [
+      "Necesito más metilamina.",
+      "Si Gus sospecha... no.",
+      "Sin medias tintas.",
+      "¿Ricina? No. Todavía no.",
+      "Pensá, Walter. Pensá.",
+    ],
+    web: [
+      "¿Esa es la DEA? ¿Hank?",
+      "Solo desierto. Bien.",
+      "Ese auto otra vez...",
+      "Nadie nos vio. Creo.",
+    ],
+  },
+  jesse: {
+    shell: [
+      "¡Yeah, ciencia, bitch!",
+      "Un toque de Chili P...",
+      "Sale re azul, yo.",
+      "¡Sí, Señor White! ¡Sí, ciencia!",
+      "¿Esto va a explotar? No, ¿no?",
+    ],
+    edit: [
+      "Dibujo un cómic. Re copado.",
+      "Pinkman: rey de los apuntes.",
+      "¿Esto lleva tilde? Bah.",
+    ],
+    read: [
+      "¿Qué dice acá? Letra chica, uf.",
+      "Manual de química... zzz.",
+      "El viejo subraya todo, yo.",
+    ],
+    think: [
+      "Ok, yo... ¿y ahora qué?",
+      "Pensá, Pinkman. Pensá, bitch.",
+      "¿Y si nos agarran? No, no.",
+    ],
+    web: [
+      "¡Cuidado! ¿Es la DEA?",
+      "Ahí afuera... ¿Tuco? Uf.",
+      "Desierto y más desierto, yo.",
+    ],
+  },
+  saul: {
+    shell: [
+      "¿Hola? Saul Goodman, diga.",
+      "No, señora: ese es otro abogado.",
+      "Francesca, cancelá todo.",
+      "¿Huell? Traé el auto.",
+      "Se lo cobro por minuto. Diga.",
+    ],
+    edit: [
+      "Un contrato... sin letra chica.",
+      "Firmá acá, acá y acá.",
+      "Esto es 100 % legal. Casi.",
+    ],
+    read: [
+      "El código penal: mi Biblia.",
+      "Precedentes... tengo un tipo.",
+      "Leer es caro. Cobro por hora.",
+    ],
+    think: [
+      "¿Y si es fraude?... Me sirve.",
+      "Tengo un plan. Siempre tengo.",
+      "¿Y si la culpa es de otro?",
+    ],
+    web: [
+      "Ese auto... ¿Mike?",
+      "Si viene la DEA, yo no estuve.",
+      "Linda vista. Sin testigos.",
+    ],
+  },
 };
 
 /** Sheldon con la manta y la notebook (uso alto de Claude). */
@@ -325,6 +546,24 @@ export const ENTER = {
     "Vengo a robar wifi. Hola.",
     "Toc toc. Ah no, eso es de Sheldon.",
   ],
+  walter: [
+    "Jesse, tenemos que cocinar.",
+    "Yo soy el que golpea la puerta.",
+    "Llegó Heisenberg.",
+    "A trabajar. Ahora.",
+  ],
+  jesse: [
+    "¡Yo! ¿Qué onda, bitch?",
+    "Llegó Pinkman, yo.",
+    "¿Ya se cocina? Uf.",
+    "¡Yeah! A cocinar, bitch.",
+  ],
+  saul: [
+    "¡Mejor llamen a Saul!",
+    "Hola, hola. ¿Quién me necesita?",
+    "Saul Goodman, a su servicio.",
+    "¿Cómo están mis clientes?",
+  ],
 };
 
 /** Quien ya estaba contesta al que entra: "quien contesta>quien entra". */
@@ -335,6 +574,12 @@ export const GREET = {
   "leonard>penny": ["¡Penny! Hola. Hola... hola.", "¡Hola! Estás... linda. Hola."],
   "penny>sheldon": ["¡Hola, cariño!", "Hola, Shelly."],
   "penny>leonard": ["¡Hola, Leonard!", "Ey, ¿traés comida?"],
+  "walter>jesse": ["Llegás tarde, Jesse.", "Jesse. Ponete el traje."],
+  "walter>saul": ["Saul. ¿Qué querés ahora?", "Nadie te llamó, Saul."],
+  "jesse>walter": ["¡Yo, Señor White!", "Ah, llegó el jefe. Genial."],
+  "jesse>saul": ["¡Ey, Saul! ¿Y mi plata?", "Llegó el abogado trucho, yo."],
+  "saul>walter": ["¡Walt! Mi cliente favorito.", "Heisenberg. Qué honor."],
+  "saul>jesse": ["Pinkman, ¡qué sorpresa!", "Ey, chico. ¿Todo legal?"],
 };
 
 /** Al entrar sin nadie en el living: un comentario, no un saludo (y no saluda con la mano). */
@@ -356,6 +601,22 @@ export const ENTER_ALONE = {
     "Uy, ¿y los chicos?",
     "Vacío. Me sirvo vino.",
     "Ni Sheldon. Qué raro.",
+  ],
+  walter: [
+    "Nadie. Mejor.",
+    "La van vacía. Silencio.",
+    "¿Jesse? Siempre tarde.",
+    "Solo yo y la química.",
+  ],
+  jesse: [
+    "¿Señor White? ...Nadie.",
+    "Solo en la van. Re tranqui.",
+    "¿Y el viejo? Mejor, yo.",
+  ],
+  saul: [
+    "¿Nadie? Cobro igual.",
+    "Vacío. Hora de facturar.",
+    "¿Dónde están mis clientes?",
   ],
 };
 
@@ -379,6 +640,23 @@ export const LEAVE = {
     "Me voy al Cheesecake. ¡Chau!",
     "Chau, cerebritos.",
   ],
+  walter: [
+    "Me voy. Nadie toque nada.",
+    "Me voy. Jesse, limpiá.",
+    "Me voy a casa. Con mi familia.",
+    "Mañana, a las 8. Puntuales.",
+  ],
+  jesse: [
+    "Me voy, yo. ¡Chau!",
+    "Me tomo el palo, bitch.",
+    "Chau, viejo. Mañana sigo.",
+  ],
+  saul: [
+    "Me voy, tengo un juicio.",
+    "Chau. La factura llega mañana.",
+    "¡Mejor llamen a Saul! Chau.",
+    "Me voy, Huell me espera.",
+  ],
 };
 
 /** Los que quedan despiden al que se va: "quien contesta>quien se va". */
@@ -389,6 +667,12 @@ export const BYE = {
   "leonard>penny": ["¡Chau, Penny! Chau... chau.", "¡Chau! ¿Mañana venís?"],
   "penny>sheldon": ["¡Chau, cariño!", "Chau, Shelly."],
   "penny>leonard": ["¡Chau, Leonard!", "Chau, cielo. Cuidate."],
+  "walter>jesse": ["Andá. Mañana a las 8.", "Chau. No hagas idioteces."],
+  "walter>saul": ["Por fin.", "Chau, Saul. Esto no se cobra."],
+  "jesse>walter": ["Chau, Señor White.", "¡Chau, viejo!"],
+  "jesse>saul": ["Chau, abogado trucho.", "¡Chau, Saul, bitch!"],
+  "saul>walter": ["Chau, Walt. Pagá a tiempo.", "Cuidate, Heisenberg."],
+  "saul>jesse": ["Chau, chico. Nada de líos.", "Portate bien, Pinkman."],
 };
 
 /** Al irse sin nadie en el living: un comentario para sí. */
@@ -408,10 +692,25 @@ export const LEAVE_ALONE = {
     "Me voy. Ni se van a enterar.",
     "Chau, departamento de nerds.",
   ],
+  walter: [
+    "Apago el mechero. Me voy.",
+    "Me voy. Todo limpio.",
+    "Nadie. Mejor así.",
+  ],
+  jesse: [
+    "Chau, van. Te quiero, yo.",
+    "Me voy antes que venga el viejo.",
+    "Nadie me ve. Me llevo un poco.",
+  ],
+  saul: [
+    "Me voy. Facturo igual.",
+    "Nadie me despide. Típico.",
+    "Saul abandonó el edificio.",
+  ],
 };
 
 const DEFAULTS = { chance: 0.6, cooldown: 30, pair_cooldown: 75, seconds: 2.6, reply_after: 1.2, reach: 2 };
-const COUCH_DEFAULTS = { every: 15, chance: 0.35, cooldown: 60, solo_cooldown: 120, settle: 8,
+const COUCH_DEFAULTS = { group: "couch", every: 15, chance: 0.35, cooldown: 60, solo_cooldown: 120, settle: 8,
                          seats: ["armchair"], solo_seats: ["kitchen_stool"] };
 const BUMP_DEFAULTS = { chance: 0.9, after: 0.3, cooldown: 25 };
 const WORK_DEFAULTS = { chance: 0.75, delay: 1, cooldown: 10, every: 30, again: 0.5, near: 4, greet: 0.8, greet_within: 6 };
@@ -607,7 +906,7 @@ function bumpTalk(world, st, cfg, rand) {
 /** Living: uno solo habla para sí, dos (o tres) se hablan. Cuenta el sillón individual de Leonard. */
 function couchTalk(world, st, cfg, rand) {
   const cc = { ...COUCH_DEFAULTS, ...(cfg.couch || {}) };
-  const couch = world.b.seats?.couch;
+  const couch = world.b.seats?.[cc.group];
   const now = world.now;
   if (cc.enabled === false || !couch || now < st.couch || st.pending.length) return;
   st.couch = now + cc.every;

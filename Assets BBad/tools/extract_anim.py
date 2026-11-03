@@ -133,6 +133,23 @@ def clean(rgba):
     return out
 
 
+def drop_slivers(f, x0, x1, share=0.04):
+    """Borra pedazos del cuadro vecino que quedaron en el corte: manchas chicas (menos de share del
+    cuadro) que tocan el borde izquierdo o derecho. Modifica f."""
+    import cv2
+    a = (f[..., 3] > 0).astype(np.uint8)
+    n, lab, stats, _ = cv2.connectedComponentsWithStats(a, connectivity=8)
+    total = a.sum()
+    gone = 0
+    for k in range(1, n):
+        x, _, w, _, area = stats[k]
+        if area < share * total and (x <= x0 or x + w >= x1):
+            f[lab == k] = 0
+            gone += area
+    if gone:
+        print(f"  cuadro {x0}-{x1}: {gone} píxeles del vecino borrados")
+
+
 def split_frames(nfg, count):
     try:
         return split_views(nfg, count)
@@ -226,6 +243,7 @@ def extract(args, th):
     for x0, x1 in split_frames(native[..., 3] > 0, n):
         f = np.zeros_like(native)
         f[:, x0:x1] = native[:, x0:x1]
+        drop_slivers(f, x0, x1)
         ys, _ = np.nonzero(f[..., 3])
         frames.append((f, ys.min(), ys.max() + 1))
     placed, anchor = place_frames(frames, args.keep_y)
