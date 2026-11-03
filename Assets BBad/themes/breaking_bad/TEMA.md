@@ -10,11 +10,12 @@ Lo general (estados, roles, procesamiento) está en [IDEA_Y_ANIMACION.md](../../
 | Fondos alineados | hechos, a la mitad: `aligned/` 1342×760 (`backgrounds.output_scale` 0.5) |
 | Grilla, lugares, capa de la puerta | hechos (`mark_grid.py`) |
 | Efectos del fondo | hechos (ver abajo) |
-| Walter (Claude) | `walk` de Gemini; `idle`, `walk_back` por código |
-| Jesse (Codex) | `idle`, `walk`, `walk_back` por código |
-| Saul (Gemini) | hoja de referencia de Gemini (`source/saul.jpg`); `idle`, `walk`, `walk_back` por código |
-| Acciones (`cook`, `write`, `read`, `look`, `think`, `wave`) | **faltan para los tres**: la cuota de imágenes de OmniRoute se agotó (429) el 2026-11-03. Mientras tanto usan `idle` o la vista quieta |
-| Frases (`chatter.js`) y escenas propias | sin hacer |
+| Walter (Claude) | `walk`, `idle`, `cook`, `think`, `read`, `write` (`--pick 1,4,1,4`) de Gemini; `walk_back` por código. Faltan `look`, `wave` |
+| Jesse (Codex) | `idle`, `walk`, `walk_back` por código. Faltan todas las de Gemini (el `idle` nuevo es prendiendo un pucho: prompt listo, pose de `think` de Sheldon) |
+| Saul (Gemini) | hoja de referencia de Gemini (`source/saul.jpg`); `idle`, `walk`, `walk_back` por código. Faltan las de Gemini |
+| Acciones que faltan | la tanda del 2026-11-03 dio 429 desde la 5.ª hoja (cupo de imágenes agotado en todas las cuentas). Mientras tanto usan `idle` o la vista quieta |
+| Frases (`chatter.js`) | hechas: cruces, choques, trabajo, entrar/salir, charla en los lugares de reposo (`couch.group: "rest"`) |
+| Escenas | `highFive` (`scenes.js`, `config.scenes.highfive`, tecla C): Jesse pregunta cuánto toca a cada uno, Walter se niega a chocar los cinco y al final choca. Usa `wave` para las manos (sin `wave`, quedan quietos) |
 
 ### Cómo seguir cuando vuelva la cuota
 De a una (OmniRoute atiende una imagen por vez; en paralelo se cortan por tiempo):
@@ -60,4 +61,4 @@ Nubes de día y de noche, estrellas que titilan (`lights` sobre el cielo), meche
 - Animaciones de acción (arriba).
 - Los manchones de luz rectangulares sobre la arena de `night_active` son de la imagen original: se pueden borrar y reemplazar por un resplandor por código.
 - Interacciones de la idea original: pelea por el mismo archivo (`punch` → `hit` → `fall`), risa ante un error del proveedor, `celebrate`, traje amarillo para `cook`, sombrero de Heisenberg.
-- Frases propias en `chatter.js`.
+- Hojas que faltan, de a una cuando vuelva el cupo: walter look, wave; jesse walk, idle, cook, think, read, write, look, wave, walk_back; saul igual que Jesse. Primero `walter wave` y `jesse wave` (las usa el choque de cinco).
