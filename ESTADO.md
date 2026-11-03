@@ -1,5 +1,40 @@
 # Estado del proyecto: escena de IAs (fondo de pantalla animado)
 
+## 2026-11-02: idle de Penny e imágenes con Gemini
+
+**Qué se hizo**
+- Idle de Penny animado por código: `Assets BBTheory/idle_breathe.py` (8 cuadros a 4 fps, respira 1 px de la cintura para arriba y parpadea cada 2 s). Original en `characters/penny/anims/idle_orig.png`, GIF en `anims/idle_preview.gif`, atlas regenerado, nota en `BIG_BANG.md`. Sin commit. No probado dentro del wallpaper.
+- Gemini Flash Image (`agy/gemini-3.1-flash-image`) genera la imagen, pero OmniRoute la tiraba: el colector de Antigravity (`open-sse/executors/antigravity/sseCollect.ts`) solo junta texto y tool calls, ignora `inlineData`.
+- Parche aplicado a OmniRoute 3.8.51 con `C:\Users\Casita\.claude\skills\imagen\scripts\patch_omniroute.py` (5 chunks de `dist/.build/next/server/chunks`; originales en `skills\imagen\omniroute_backup\3.8.51\`, `--restore` vuelve atrás). La imagen viaja en el texto como `![image](data:...)`. Al actualizar OmniRoute hay que volver a correrlo.
+- Script nuevo `skills\imagen\scripts\generar_imagen.ps1 -Prompt ... -Ref a.jpg,b.webp -Out ruta_sin_ext` (exit 0 ok, 10 sin imagen, 3 OmniRoute caído, 2 args). Falta el `SKILL.md` de la skill `imagen`.
+
+- Probado: `generar_imagen.ps1` con OmniRoute reiniciado devuelve la imagen (exit 0, ~1 min). Idle de Penny de Gemini en `characters/penny/source/idle_gemini.jpg`: Penny bien, cuadro 1 de frente (los otros 3 en 3/4, el 3 se acomoda el pelo) y sombras bajo los pies. Sin extraer.
+- `SKILL.md` de `imagen` escrito (uso por iniciativa para hojas de sprites, fondos y props; cómo re-parchear OmniRoute).
+
+**Hipótesis vigentes**
+- Ninguna nueva.
+
+**Descartado**
+- `/v1/images/generations`: con `agy/` rechaza el nombre, con `antigravity/` da Internal error. `requestType: image_gen` y `modalities` no cambian nada. Codex image sin cuota hasta el 16/11. AI Horde no acepta referencias.
+
+**Próximo paso**
+- Mirarlo en Lively. Commit cuando el usuario diga.
+- (Historia) Idle de Gemini extraído (`--pick 2,4,3,4 --fps 2`, 51×112, alturas iguales a la referencia) y guardado **fuera** de `anims/` (`source/idle_gemini.png/.json`) para no meterlo al atlas; atlas restaurado. Comparación lado a lado (código izq., Gemini der.) en `source/idle_compare.gif`.
+- El usuario eligió el de Gemini: ya es `anims/idle` (`--pick 2,4,3,4 --fps 2`), atlas y bundle reexportados. El de código quedó en `source/idle_code.png/.json`. Probado en la demo del navegador: Penny parada con el idle nuevo, sin errores. Nota en `BIG_BANG.md`. Sin commit.
+
+## 2026-11-01: repo para GitHub
+
+**Qué se hizo**
+- `git init` en `E:\ProyectosIA` (rama `main`). Un commit con identidad `tbittech <96559059+tbittech@users.noreply.github.com>`, solo en este repo.
+- Archivos nuevos: `README.md`, `LICENSE` (MIT para el código; el arte es fan art no comercial, fuera de la MIT, con aviso de Warner/CBS) y `.gitignore`. Quedan afuera `.claude/`, `Assets BBTheory/referencias/` (fan art de otros artistas), `Assets BBad/themes/` y el estado del servidor.
+- GitHub CLI instalado (`C:\Program Files\GitHub CLI\gh.exe`), logueado como tbittech. Repo público creado y subido: https://github.com/tbittech/living-4a-wallpaper (remote `origin`).
+
+**Hipótesis vigentes**
+- Los fondos (`backgrounds/*.jpg`) se generaron con IA. No está confirmado.
+
+**Próximo paso**
+- Si algún fondo se bajó de internet, sacarlo del repo. Cambios futuros: `git add -A && git commit && git push`.
+
 ## 2026-11-01: instalador portable
 
 **Qué se hizo**

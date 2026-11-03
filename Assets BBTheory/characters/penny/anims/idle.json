@@ -1,20 +1,21 @@
 {
-  "source": "idle.jpg",
+  "source": "idle_gemini.jpg",
   "frames": 4,
-  "fps": 4,
+  "fps": 2,
   "loop": true,
   "frame_size": [
-    50,
+    51,
     112
   ],
   "anchor": [
-    23,
+    25,
     111
   ],
   "cell": 5.382,
   "cell_forced": false,
-  "grid_quality": 0.52,
+  "grid_quality": 0.53,
   "keep_y": false,
-  "pick": "2,2,2,2",
-  "lower": 0
+  "pick": "2,4,3,4",
+  "lower": 0,
+  "shift": 0
 }
