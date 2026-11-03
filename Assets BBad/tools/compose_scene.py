@@ -25,7 +25,7 @@ from PIL import Image, ImageDraw
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 import layers  # noqa: E402
 import theme as themes  # noqa: E402
-from grid import FACINGS  # noqa: E402
+from grid import facings_of  # noqa: E402
 
 
 def parse_actor(spec, th, taken):
@@ -39,7 +39,7 @@ def parse_actor(spec, th, taken):
         taken.add(where)
     facing = None if "," in where else th.facing(where)
     if facing:
-        _, view, flip = FACINGS[facing]
+        _, view, flip = facings_of(th.scene)[facing]
     for p in parts[1:]:
         if p == "left":
             flip = True

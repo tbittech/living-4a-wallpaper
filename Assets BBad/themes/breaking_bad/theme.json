@@ -1,0 +1,464 @@
+{
+  "name": "Breaking Bad: la van",
+  "backgrounds": {
+    "_comment": "Archivos en backgrounds/. align_box: zona que tiene que quedar fija al alinear (fracciones de ancho/alto de la referencia); null = toda la imagen.",
+    "reference": "day",
+    "sources": {
+      "day": "solcito.jpg",
+      "night_idle": "solitario spider.jpg",
+      "night_active": "noche con amigos.jpg"
+    },
+    "align_box": [
+      0.23,
+      0.33,
+      0.76,
+      0.77
+    ],
+    "output_scale": 0.5
+  },
+  "scene": {
+    "_comment": "Grilla de la van sobre aligned/ (1342x760): casillas de 17x8 px, a = profundidad, b = izquierda a derecha (mark_grid.py). Lugares = casilla + dirección.",
+    "sprite_scale": 2,
+    "grid": {
+      "origin": [500, 476],
+      "u": [0, 8],
+      "v": [17, 0]
+    },
+    "facings": {
+      "_comment": "Van de costado: a = profundidad, b = izquierda a derecha.",
+      "down_right": {
+        "step": [0, 1],
+        "view": "three_quarter",
+        "flip": false
+      },
+      "up_left": {
+        "step": [0, -1],
+        "view": "three_quarter",
+        "flip": true
+      },
+      "down_left": {
+        "step": [1, 0],
+        "view": "three_quarter",
+        "flip": true
+      },
+      "up_right": {
+        "step": [-1, 0],
+        "view": "back",
+        "flip": false
+      }
+    },
+    "tiles": {
+      "-1": [[11, 15]],
+      "0": [[0, 21]],
+      "1": [[0, 21]],
+      "2": [[8, 21]],
+      "3": [[8, 21]],
+      "4": [[8, 21]]
+    },
+    "places": {
+      "door": {
+        "tile": [0, 21],
+        "facing": "down_left"
+      },
+      "exit": {
+        "tile": [0, 21],
+        "facing": "up_right"
+      },
+      "lab_right": {
+        "tile": [0, 12],
+        "facing": "up_left"
+      },
+      "lab_left": {
+        "tile": [0, 2],
+        "facing": "down_right"
+      },
+      "bench": {
+        "tile": [0, 6],
+        "facing": "up_right"
+      },
+      "barrels": {
+        "tile": [1, 17],
+        "facing": "down_right"
+      },
+      "window": {
+        "tile": [0, 0],
+        "facing": "up_right"
+      },
+      "center": {
+        "tile": [2, 13],
+        "facing": "down_right"
+      },
+      "rest_a": {
+        "tile": [3, 15],
+        "facing": "down_right"
+      },
+      "rest_b": {
+        "tile": [3, 10],
+        "facing": "down_right"
+      },
+      "rest_c": {
+        "tile": [3, 19],
+        "facing": "up_left"
+      }
+    },
+    "seats": {
+      "_comment": "Grupos de lugares: un rol que apunta al grupo va al del personaje (owners) o al primero libre.",
+      "lab": [
+        "lab_right",
+        "lab_left"
+      ],
+      "rest": [
+        "rest_a",
+        "rest_b",
+        "rest_c"
+      ]
+    },
+    "owners": {
+      "lab_right": "walter",
+      "rest_a": "walter",
+      "rest_b": "jesse",
+      "rest_c": "saul"
+    },
+    "footprints": {
+      "door_wall": {
+        "-3": [[23, 23]],
+        "-2": [[23, 23]],
+        "-1": [[23, 23]],
+        "0": [[23, 23]],
+        "1": [[23, 23]],
+        "2": [[23, 23]],
+        "3": [[23, 23]],
+        "4": [[23, 23]],
+        "5": [[23, 23]],
+        "6": [[23, 23]],
+        "7": [[23, 23]]
+      }
+    },
+    "layers": {
+      "_comment": "Pared a la derecha de la puerta (mark_grid.py): tapa al que entra.",
+      "door_wall": {
+        "pos": [876, 300],
+        "tiles": {
+          "-3": [[23, 23]],
+          "-2": [[23, 23]],
+          "-1": [[23, 23]],
+          "0": [[23, 23]],
+          "1": [[23, 23]],
+          "2": [[23, 23]],
+          "3": [[23, 23]],
+          "4": [[23, 23]],
+          "5": [[23, 23]],
+          "6": [[23, 23]],
+          "7": [[23, 23]]
+        }
+      }
+    },
+    "effects": {
+      "_comment": "Efectos por código (Assets BBad/tools/effects.py), en píxeles de aligned/ (1342x760). px = tamaño del bloque. backgrounds = fondos donde va; role/place = solo con alguien en ese rol/lugar; stage under (debajo de capas y personajes) u over (encima).",
+      "px": 2,
+      "clouds": {
+        "type": "clouds",
+        "backgrounds": [
+          "day"
+        ],
+        "rects": [[0, 20, 1342, 160]],
+        "sky": {
+          "min_lum": 100
+        },
+        "count": 6,
+        "speed": 5,
+        "block": 3,
+        "min_w": 10,
+        "var_w": 12,
+        "colors": [[255, 255, 255], [214, 230, 238]],
+        "alpha": 0.95
+      },
+      "night_clouds": {
+        "type": "clouds",
+        "backgrounds": [
+          "night_idle",
+          "night_active"
+        ],
+        "rects": [[0, 20, 1342, 140]],
+        "sky": {
+          "min_lum": 10,
+          "g_minus_r": -60,
+          "b_minus_r": 20
+        },
+        "count": 4,
+        "speed": 3,
+        "block": 3,
+        "min_w": 10,
+        "var_w": 10,
+        "colors": [[96, 92, 150], [74, 70, 124]],
+        "alpha": 0.9
+      },
+      "stars": {
+        "type": "lights",
+        "backgrounds": [
+          "night_idle",
+          "night_active"
+        ],
+        "rects": [[0, 0, 1342, 170]],
+        "min_lum": 140,
+        "max_size": 12,
+        "period": [0.4, 2.2],
+        "off_chance": 0.35,
+        "dim": 0.85,
+        "extra": 0
+      },
+      "burner": {
+        "type": "glow",
+        "center": [555, 408],
+        "radius": [10, 6],
+        "bands": 2,
+        "colors": [[255, 170, 60], [255, 210, 90]],
+        "alpha": [
+          0.2,
+          0.3,
+          0.4
+        ],
+        "flicker": [0.08, 0.25],
+        "scene_s": 0.3
+      },
+      "lamp": {
+        "type": "glow",
+        "backgrounds": [
+          "night_active"
+        ],
+        "center": [667, 345],
+        "radius": [70, 40],
+        "bands": 3,
+        "colors": [[255, 200, 120]],
+        "alpha": [
+          0.05,
+          0.08,
+          0.1
+        ],
+        "flicker": [0.3, 4.0]
+      },
+      "flask_steam": {
+        "type": "steam",
+        "stage": "under",
+        "sources": [[555, 362], [652, 330]],
+        "particles": 4,
+        "height": 18,
+        "rate": 0.35,
+        "sway": 2,
+        "colors": [[245, 245, 240], [220, 222, 226]],
+        "alpha": [
+          0.55,
+          0.35,
+          0.15
+        ]
+      },
+      "bubbles_red": {
+        "type": "steam",
+        "stage": "under",
+        "sources": [[588, 402], [596, 402]],
+        "particles": 3,
+        "height": 10,
+        "rate": 0.8,
+        "sway": 1,
+        "colors": [[255, 190, 190], [255, 150, 150]],
+        "alpha": [
+          0.9,
+          0.7,
+          0.4
+        ]
+      },
+      "bubbles_green": {
+        "type": "steam",
+        "stage": "under",
+        "sources": [[652, 385]],
+        "particles": 3,
+        "height": 10,
+        "rate": 0.7,
+        "sway": 1,
+        "colors": [[220, 255, 200], [180, 240, 170]],
+        "alpha": [
+          0.9,
+          0.7,
+          0.4
+        ]
+      },
+      "cook_smoke": {
+        "type": "steam",
+        "role": "shell",
+        "sources": [[752, 258], [770, 258], [788, 258]],
+        "particles": 10,
+        "height": 80,
+        "rate": 0.22,
+        "sway": 7,
+        "colors": [[235, 235, 235], [200, 200, 205]],
+        "alpha": [
+          0.8,
+          0.55,
+          0.3
+        ],
+        "block": 4
+      },
+      "tumbleweed": {
+        "type": "tumbleweed",
+        "backgrounds": [
+          "day"
+        ],
+        "band": [0, 600, 1342, 700],
+        "every": 75,
+        "chance": 0.6,
+        "speed": 70,
+        "radius": 12,
+        "bounce": 7,
+        "hop": 0.6,
+        "block": 3,
+        "spokes": 10
+      },
+      "tumbleweed_night": {
+        "type": "tumbleweed",
+        "backgrounds": [
+          "night_idle",
+          "night_active"
+        ],
+        "band": [0, 600, 1342, 700],
+        "every": 110,
+        "chance": 0.5,
+        "speed": 60,
+        "radius": 12,
+        "bounce": 6,
+        "hop": 0.6,
+        "colors": [[70, 66, 96], [52, 50, 76], [92, 88, 120]],
+        "shadow": [10, 10, 30],
+        "block": 3,
+        "spokes": 10
+      }
+    }
+  },
+  "roles": {
+    "_comment": "Rol genérico (lo que hace el agente) -> lugar de este tema y animación.",
+    "entry": {
+      "place": "door"
+    },
+    "shell": {
+      "place": "lab",
+      "anim": "cook"
+    },
+    "edit": {
+      "place": "bench",
+      "anim": "write"
+    },
+    "read": {
+      "place": "barrels",
+      "anim": "read"
+    },
+    "web": {
+      "place": "window",
+      "anim": "look"
+    },
+    "think": {
+      "place": "center",
+      "anim": "think"
+    },
+    "rest": {
+      "place": "rest",
+      "anim": "idle"
+    },
+    "scene": {
+      "place": "center"
+    }
+  },
+  "animations": {
+    "_comment": "Cuadros, fps y loop por defecto de cada animación (anims/<anim>.json manda si existe).",
+    "idle": {
+      "frames": 4,
+      "fps": 3,
+      "loop": true
+    },
+    "walk": {
+      "frames": 4,
+      "fps": 8,
+      "loop": true
+    },
+    "walk_back": {
+      "frames": 4,
+      "fps": 8,
+      "loop": true
+    },
+    "wave": {
+      "frames": 4,
+      "fps": 6,
+      "loop": false
+    },
+    "cook": {
+      "frames": 4,
+      "fps": 5,
+      "loop": true
+    },
+    "write": {
+      "frames": 4,
+      "fps": 6,
+      "loop": true
+    },
+    "read": {
+      "frames": 4,
+      "fps": 3,
+      "loop": true
+    },
+    "look": {
+      "frames": 4,
+      "fps": 3,
+      "loop": true
+    },
+    "think": {
+      "frames": 4,
+      "fps": 3,
+      "loop": true
+    },
+    "celebrate": {
+      "frames": 4,
+      "fps": 8,
+      "loop": false
+    },
+    "argue": {
+      "frames": 4,
+      "fps": 6,
+      "loop": true
+    }
+  },
+  "cast": {
+    "claude": "walter",
+    "codex": "jesse",
+    "gemini": "saul"
+  },
+  "refs": [
+    {
+      "name": "cook_night",
+      "bg": "night_active",
+      "t": 5.3,
+      "actors": [[ "walter", "lab_right", "idle" ], [ "jesse", "lab_left", "idle" ]],
+      "state": {
+        "lab_right": {
+          "role": "shell",
+          "since": 1.0
+        },
+        "lab_left": {
+          "role": "shell",
+          "since": 2.0
+        }
+      }
+    },
+    {
+      "name": "rest_day",
+      "bg": "day",
+      "t": 4.7,
+      "actors": [[ "saul", "rest_c", "idle" ], [ "walter", "window", "ref_back" ]],
+      "state": {}
+    },
+    {
+      "name": "idle_night",
+      "bg": "night_idle",
+      "t": 11.2,
+      "actors": [],
+      "state": {}
+    }
+  ]
+}

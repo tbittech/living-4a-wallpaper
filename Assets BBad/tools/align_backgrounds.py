@@ -179,12 +179,17 @@ def main():
     x1 -= (x1 - x0) % 2
     y1 -= (y1 - y0) % 2
 
+    # output_scale: achicar los fondos alineados (0.5 = mitad, para fondos que vienen con "píxeles falsos" de 2x o más)
+    s = float(cfg.get("output_scale", 1))
     out_dir.mkdir(exist_ok=True)
     for key, img in results.items():
-        cv2.imwrite(str(out_dir / f"{key}.png"), img[y0:y1, x0:x1])
+        img = img[y0:y1, x0:x1]
+        if s != 1:
+            img = cv2.resize(img, (round((x1 - x0) * s), round((y1 - y0) * s)), interpolation=cv2.INTER_AREA)
+        cv2.imwrite(str(out_dir / f"{key}.png"), img)
 
     report["crop"] = {"x": int(x0), "y": int(y0), "w": int(x1 - x0), "h": int(y1 - y0),
-                      "reference": ref_name, "reference_size": [w, h]}
+                      "reference": ref_name, "reference_size": [w, h], "output_scale": s}
     (out_dir / "alignment.json").write_text(json.dumps(report, indent=2), encoding="utf-8")
     print(json.dumps(report, indent=2))
 

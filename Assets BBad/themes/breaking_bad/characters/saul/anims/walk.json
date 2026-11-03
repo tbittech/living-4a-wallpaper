@@ -1,0 +1,18 @@
+{
+  "source": "code",
+  "frames": 4,
+  "fps": 6,
+  "loop": true,
+  "frame_size": [
+    32,
+    58
+  ],
+  "anchor": [
+    16,
+    57
+  ],
+  "keep_y": false,
+  "pick": null,
+  "lower": 0,
+  "shift": 0
+}

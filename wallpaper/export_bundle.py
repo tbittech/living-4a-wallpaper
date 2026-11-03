@@ -27,22 +27,11 @@ sys.path.insert(0, str(ROOT.parent / "Assets BBad" / "tools"))
 import effects  # noqa: E402
 import layers  # noqa: E402
 import theme as themes  # noqa: E402
-from grid import FACINGS  # noqa: E402
+from grid import facings_of  # noqa: E402
 
 BGS = ("day", "night_idle", "night_active")
-# Escenas de referencia: fondo, tiempo, personajes (id, lugar, animación; cuadro 0) y estado de los efectos
-REFS = [
-    {"name": "couch_night", "bg": "night_active", "t": 3.0,
-     "actors": [["sheldon", "couch_left", "sit"]], "state": {}},
-    {"name": "shell_night", "bg": "night_active", "t": 5.3,
-     "actors": [["leonard", "desk_left", "type"], ["sheldon", "desk_right", "type"]],
-     "state": {"desk_left": {"role": "shell", "since": 1.0}, "desk_right": {"role": "shell", "since": 2.0}}},
-    {"name": "edit_day", "bg": "day", "t": 4.7,
-     "actors": [["sheldon", "whiteboard", "write"], ["penny", "couch_mid", "sit"]],
-     "state": {"whiteboard": {"role": "edit", "since": 1.5}}},
-    {"name": "idle_night", "bg": "night_idle", "t": 11.2, "actors": [], "state": {}},
-]
-
+# Escenas de referencia: theme.json -> "refs": [{"name", "bg", "t", "actors": [[id, lugar, animación]], "state"}]
+# (cuadro 0 de cada animación; state = estado de los efectos)
 
 def save_alpha(shape, path):
     """Forma en [0, 1] -> PNG blanco con esa forma en el alfa."""
@@ -106,7 +95,8 @@ def export_refs(th, out, chars):
     """Escenas de referencia compuestas con el pipeline de Python (layers + effects)."""
     (out / "_ref").mkdir()
     refs = []
-    for ref in REFS:
+    sc = th.sprite_scale
+    for ref in th.data.get("refs", []):
         bg = ref["bg"]
         actors = []
         for cid, place, anim in ref["actors"]:
@@ -116,8 +106,10 @@ def export_refs(th, out, chars):
             x, y, w, h = a["frames"][0]
             spr = atlas.crop((x, y, x + w, y + h))
             ax, ay = a["anchor"]
-            if FACINGS[th.scene["places"][place]["facing"]][2]:
-                spr, ax = spr.transpose(Image.FLIP_LEFT_RIGHT), w - 1 - ax
+            if sc != 1:
+                spr, ax, ay = spr.resize((w * sc, h * sc), Image.NEAREST), ax * sc, ay * sc
+            if facings_of(th.scene)[th.scene["places"][place]["facing"]][2]:
+                spr, ax = spr.transpose(Image.FLIP_LEFT_RIGHT), spr.width - 1 - ax
             fx_, fy = th.place(place)
             actors.append({"sprite": spr, "pos": (fx_ - ax, fy - ay), "tile": tuple(th.scene["places"][place]["tile"])})
         fx = effects.Effects(th, bg)
@@ -180,8 +172,19 @@ def main():
         cid = d.name.lower()
         meta = json.loads(atlas.read_text(encoding="utf-8"))
         (out / "chars" / cid).mkdir(parents=True)
-        shutil.copy(d / meta["image"], out / "chars" / cid / "atlas.png")
-        chars[cid] = {"atlas": f"chars/{cid}/atlas.png", "anims": meta["animations"]}
+        s = th.sprite_scale
+        anims = meta["animations"]
+        if s == 1:
+            shutil.copy(d / meta["image"], out / "chars" / cid / "atlas.png")
+        else:
+            # El frontend dibuja los sprites a tamaño nativo: el atlas sale ya agrandado (sin suavizar).
+            # Ancla escalada igual que compose_scene.py (esquina del bloque), para que ?ref=...&diff=1 coincida.
+            img = Image.open(d / meta["image"])
+            img.resize((img.width * s, img.height * s), Image.NEAREST).save(out / "chars" / cid / "atlas.png")
+            anims = {k: dict(a, frames=[[v * s for v in f] for f in a["frames"]],
+                             anchor=[v * s for v in a["anchor"]])
+                     for k, a in anims.items()}
+        chars[cid] = {"atlas": f"chars/{cid}/atlas.png", "anims": anims}
         folders[cid] = d.name
 
     bundle = {
@@ -192,7 +195,7 @@ def main():
         "walkable": walkable,
         "centers": centers,
         "places": places,
-        "facings": {k: {"step": list(d), "view": v, "flip": f} for k, (d, v, f) in FACINGS.items()},
+        "facings": {k: {"step": list(d), "view": v, "flip": f} for k, (d, v, f) in g.facings.items()},
         "seats": {k: v for k, v in sc.get("seats", {}).items() if isinstance(v, list)},
         "owners": sc.get("owners", {}),
         "prefers": {k: v for k, v in sc.get("prefers", {}).items() if not k.startswith("_")},

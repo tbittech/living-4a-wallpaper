@@ -1,0 +1,40 @@
+{
+  "source": "jessejoy.jpg",
+  "cell": [
+    22.93,
+    22.926
+  ],
+  "phase": [
+    22.65,
+    5.62
+  ],
+  "frame_size": [
+    31,
+    59
+  ],
+  "views": [
+    "front",
+    "three_quarter",
+    "side",
+    "back"
+  ],
+  "sizes": {
+    "front": [
+      29,
+      57
+    ],
+    "three_quarter": [
+      27,
+      56
+    ],
+    "side": [
+      26,
+      56
+    ],
+    "back": [
+      28,
+      56
+    ]
+  },
+  "colors": 24
+}

@@ -22,7 +22,7 @@ from PIL import Image, ImageFilter
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 import layers  # noqa: E402
 import theme as themes  # noqa: E402
-from grid import FACINGS, facing_of  # noqa: E402
+from grid import facing_of  # noqa: E402
 
 # Dirección -> animación de caminar (las de la izquierda son las de la derecha espejadas)
 WALK = {"three_quarter": "walk", "back": "walk_back"}
@@ -60,7 +60,7 @@ def walk_steps(g, start, path, anims, fps, speed, t0=0):
     per_tile = max(1, round(fps / speed))
     t, cur = t0, start
     for nxt in path:
-        _, view, flip = FACINGS[facing_of((nxt[0] - cur[0], nxt[1] - cur[1]))]
+        _, view, flip = g.facings[facing_of((nxt[0] - cur[0], nxt[1] - cur[1]), g.facings)]
         frames, (ax, ay), afps = anims[view]
         (x0, y0), (x1, y1) = g.center(*cur), g.center(*nxt)
         for i in range(per_tile):
@@ -165,7 +165,7 @@ def main():
     steps = walk_steps(g, start, path, anims, args.fps, args.speed)
     # Al llegar, tres segundos: sit en un asiento, idle parado (son de 3/4 de frente);
     # si falta la animación o el lugar mira de espaldas, la vista quieta
-    _, view, flip = FACINGS[places[goal_key]["facing"]]
+    _, view, flip = g.facings[places[goal_key]["facing"]]
     seated = any(goal_key in seats for seats in th.scene.get("seats", {}).values() if isinstance(seats, list))
     if args.anim:
         arrive = load_anim(char_dir, args.anim, scale)

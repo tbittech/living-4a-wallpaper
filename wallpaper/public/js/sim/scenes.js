@@ -135,7 +135,9 @@ export function* wander(ch, rand = Math.random) {
     if (!to) {
       const tiles = w.grid.tiles;
       const t = tiles[Math.floor(rand() * tiles.length)];
-      const free = w.freeTileNear(t, new Set(), ch);
+      // Nunca en la casilla de un lugar: en la van los lugares de reposo son del piso y otro puede ir para ahí
+      const places = new Set(Object.values(w.b.places).map((p) => key(...p.tile)));
+      const free = w.freeTileNear(t, places, ch);
       if (free) to = `@${free[0]},${free[1]}/${rand() < 0.5 ? "down_right" : "down_left"}`;
     }
     if (!to) break;

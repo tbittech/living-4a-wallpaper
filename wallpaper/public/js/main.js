@@ -25,6 +25,8 @@ if (params.has("leave")) config.leave_after = Number(params.get("leave"));
 let debug = params.get("debug") === "1";
 
 const theme = params.get("theme") || config.theme;
+// Lo propio de cada tema (home, disputas, disfraces, escenas, charla) pisa lo general: config.themes.<tema>
+Object.assign(config, config.themes?.[theme] || {});
 const b = await loadBundle(theme);
 const fx = await Effects.load(b, `bundle/${theme}/`);
 const grid = new Grid(b);

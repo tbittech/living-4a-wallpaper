@@ -279,6 +279,7 @@ export class Effects {
     const height = e.height ?? 24, rate = e.rate ?? 0.5;
     const colors = e.colors ?? [[240, 240, 240], [210, 214, 220]];
     const alphas = e.alpha ?? [0.6, 0.4, 0.2];
+    const bs = e.block ?? this.px;
     d.sources.forEach(([x0, y0], si) => {
       for (let k = 0; k < n; k++) {
         const f = (((t * rate * (0.8 + 0.4 * rnd(name, si)) + k / n + rnd(name, si, k)) % 1) + 1) % 1;
@@ -286,8 +287,8 @@ export class Effects {
         const x = x0 + (e.sway ?? 3) * Math.sin(2 * Math.PI * (f * 1.2 + rnd(name, si, k, "p")));
         const band = Math.min(alphas.length - 1, Math.floor(f * alphas.length));
         const col = band === 0 ? colors[0] : colors[colors.length - 1];
-        this.block(ctx, x, y, col, alphas[band]);
-        if (f < 0.5) this.block(ctx, x + this.px, y, col, alphas[band] * 0.7);
+        this.block(ctx, x, y, col, alphas[band], bs);
+        if (f < 0.5) this.block(ctx, x + bs, y, col, alphas[band] * 0.7, bs);
       }
     });
   }
@@ -322,6 +323,35 @@ export class Effects {
       }
     }
     if (e.rim) this.boxFill(ctx, e.rim, e.light ?? [170, 210, 255], 0.8 * lvl);
+  }
+
+  // --- tumbleweed: planta rodadora que cruza el piso cada tanto ---
+  draw_tumbleweed(ctx, name, e, d, t) {
+    const every = e.every ?? 90, speed = e.speed ?? 60;
+    const cyc = Math.floor(t / every);
+    if (rnd(name, "go", cyc) >= (e.chance ?? 0.5)) return;
+    const [x0, y0, x1, y1] = e.band;
+    const r = e.radius ?? 10;
+    const local = t - cyc * every;
+    const dist = local * speed;
+    if (dist > x1 - x0 + 4 * r) return;
+    const right = rnd(name, "dir", cyc) < (e.right_chance ?? 0.5);
+    const x = right ? x0 - 2 * r + dist : x1 + 2 * r - dist;
+    const base = y0 + rnd(name, "y", cyc) * (y1 - y0);
+    const hop = e.hop ?? 0.7;
+    const y = base - r - (e.bounce ?? 6) * Math.abs(Math.sin((Math.PI * local) / hop));
+    const ang = (dist / r) * (right ? 1 : -1);
+    const colors = e.colors ?? [[214, 170, 100], [170, 128, 70], [120, 84, 44]];
+    const spokes = e.spokes ?? 14;
+    const shadow = e.shadow ?? [60, 40, 30];
+    this.block(ctx, x - r * 0.6, base, shadow, 0.25);
+    this.block(ctx, x + r * 0.2, base, shadow, 0.25);
+    for (let k = 0; k < spokes; k++) {
+      (e.rings ?? [0.25, 0.45, 0.65, 0.85, 1.0]).forEach((f, j) => {
+        const a = ang + (2 * Math.PI * k) / spokes + j * 0.7;
+        this.block(ctx, x + Math.cos(a) * r * f, y + Math.sin(a) * r * f, colors[(k + j) % colors.length], 1, e.block);
+      });
+    }
   }
 
   // --- spill: reflejo de la pantalla sobre quien la mira ---

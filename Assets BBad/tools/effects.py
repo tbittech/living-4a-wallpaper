@@ -15,6 +15,7 @@ Todo en píxeles del fondo alineado. Tipos:
     screen   pantalla de compu prendida mientras el rol está en su lugar: de frente, líneas de código
              que suben (rect); de espaldas, un filo de luz (rim).
     spill    reflejo de una pantalla sobre quien la mira (va con stage over).
+    tumbleweed  planta rodadora que cruza una franja del piso cada tanto (every, chance), rodando y rebotando.
 
 Claves comunes: "backgrounds" (fondos donde va; todos si falta), "role" / "place" (solo cuando hay
 alguien con ese rol, en ese lugar), "stage": "under" (debajo de capas y personajes) u "over" (encima).
@@ -425,6 +426,7 @@ class Effects:
         height, rate = e.get("height", 24), e.get("rate", 0.5)
         colors = e.get("colors", [[240, 240, 240], [210, 214, 220]])
         alphas = e.get("alpha", [0.6, 0.4, 0.2])
+        bs = e.get("block", self.px)
         for si, (x0, y0) in enumerate(sources):
             for k in range(n):
                 f = (t * rate * (0.8 + 0.4 * rnd(name, si)) + k / n + rnd(name, si, k)) % 1
@@ -432,9 +434,9 @@ class Effects:
                 x = x0 + e.get("sway", 3) * math.sin(2 * math.pi * (f * 1.2 + rnd(name, si, k, "p")))
                 band = min(len(alphas) - 1, int(f * len(alphas)))
                 col = colors[0] if band == 0 else colors[-1]
-                self._block(ov, x, y, col, alphas[band])
+                self._block(ov, x, y, col, alphas[band], bs)
                 if f < 0.5:      # abajo el vapor es más grueso
-                    self._block(ov, x + self.px, y, col, alphas[band] * 0.7)
+                    self._block(ov, x + bs, y, col, alphas[band] * 0.7, bs)
 
     # ---- screen: pantallas de las compus --------------------------------------------------
     def _draw_screen(self, ov, name, e, t, since):
@@ -467,6 +469,36 @@ class Effects:
         if e.get("rim"):
             # De espaldas: borde de luz alrededor del monitor
             self._box_fill(ov, e["rim"], e.get("light", [170, 210, 255]), 0.8 * lvl)
+
+    # ---- tumbleweed: planta rodadora ------------------------------------------------------
+    def _draw_tumbleweed(self, ov, name, e, t, since):
+        """Bola de ramitas que cruza el piso rodando y rebotando, cada tanto (every s, con chance)."""
+        every, speed = e.get("every", 90), e.get("speed", 60)
+        cyc = int(t // every)
+        if rnd(name, "go", cyc) >= e.get("chance", 0.5):
+            return
+        x0, y0, x1, y1 = e["band"]   # franja de piso que cruza: x de punta a punta, y donde apoya
+        r = e.get("radius", 10)
+        local = t - cyc * every
+        dist = local * speed
+        if dist > x1 - x0 + 4 * r:
+            return
+        right = rnd(name, "dir", cyc) < e.get("right_chance", 0.5)
+        x = x0 - 2 * r + dist if right else x1 + 2 * r - dist
+        base = y0 + rnd(name, "y", cyc) * (y1 - y0)
+        hop = e.get("hop", 0.7)
+        y = base - r - e.get("bounce", 6) * abs(math.sin(math.pi * local / hop))
+        ang = (dist / r) * (1 if right else -1)
+        colors = e.get("colors", [[214, 170, 100], [170, 128, 70], [120, 84, 44]])
+        s = e.get("block", self.px)
+        self._block(ov, x - r * 0.6, base, e.get("shadow", [60, 40, 30]), 0.25, None)   # sombra en el piso
+        self._block(ov, x + r * 0.2, base, e.get("shadow", [60, 40, 30]), 0.25, None)
+        spokes = e.get("spokes", 14)
+        for k in range(spokes):
+            for j, f in enumerate(e.get("rings", [0.25, 0.45, 0.65, 0.85, 1.0])):
+                a = ang + 2 * math.pi * k / spokes + j * 0.7
+                self._block(ov, x + math.cos(a) * r * f, y + math.sin(a) * r * f, colors[(k + j) % len(colors)],
+                            1.0, s)
 
     def _prep_spill(self, name, e):
         shape, box = self._iso_glow(e["center"], e["radius"], e.get("bands", 2))

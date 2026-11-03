@@ -71,5 +71,24 @@
     "write_file": "edit", "read_file": "read", "read_many_files": "read", "list_directory": "read", "grep_search": "read",
     "search_file_content": "read", "view_image": "read", "google_web_search": "web", "js": "web",
     "request_user_input": "think", "ask_user": "think", "invoke_agent": "think", "enter_plan_mode": "think"
+  },
+  "themes": {
+    "_comment": "Lo propio de cada tema: pisa las claves de arriba (main.js). Big Bang usa las de arriba.",
+    "breaking_bad": {
+      "home": { "walter": "door", "jesse": "door", "saul": "door" },
+      "disputes": [],
+      "place_disputes": {},
+      "costumes": {},
+      "chatter": {
+        "enabled": true, "chance": 0.85, "cooldown": 15, "pair_cooldown": 40, "seconds": 2.8, "reply_after": 1.3, "reach": 2,
+        "couch": { "every": 10, "chance": 0.7, "cooldown": 22, "solo_cooldown": 40, "settle": 4, "seats": [], "solo_seats": [] },
+        "bump": { "chance": 0.9, "after": 0.3, "cooldown": 25 },
+        "work": { "chance": 0.75, "delay": 1, "cooldown": 10, "every": 30, "again": 0.5, "near": 4, "greet": 0.8, "greet_within": 6 }
+      },
+      "scenes": {
+        "special_gap": 240,
+        "wander": { "after": 45, "chance": 0.35, "stay": [5, 15], "places": ["window", "center", "barrels"] }
+      }
+    }
   }
 }

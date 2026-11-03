@@ -12,9 +12,11 @@ const { World } = await imp("js/sim/world.js");
 const { Character } = await imp("js/sim/character.js");
 const { Demo } = await imp("js/demo.js");
 const { chatter } = await imp("js/sim/chatter.js");
-const b = JSON.parse(fs.readFileSync(P + "bundle/big_bang/bundle.json", "utf8"));
+const theme = process.argv[3] || "big_bang";   // node tools/sim_test.mjs [semilla] [tema]
+const b = JSON.parse(fs.readFileSync(P + `bundle/${theme}/bundle.json`, "utf8"));
 for (const c of Object.values(b.characters)) c.img = { width: 10, height: 10 };
 const config = JSON.parse(fs.readFileSync(P + "config.json", "utf8"));
+Object.assign(config, config.themes?.[theme] || {});   // como main.js
 config.leave_after = config.demo_leave_after ?? 180;
 const grid = new Grid(b), world = new World(b, grid, config);
 const by = {};

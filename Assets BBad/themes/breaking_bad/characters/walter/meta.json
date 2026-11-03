@@ -1,0 +1,40 @@
+{
+  "source": "walt.jpg",
+  "cell": [
+    22.932,
+    22.932
+  ],
+  "phase": [
+    22.87,
+    5.66
+  ],
+  "frame_size": [
+    34,
+    58
+  ],
+  "views": [
+    "front",
+    "three_quarter",
+    "side",
+    "back"
+  ],
+  "sizes": {
+    "front": [
+      32,
+      55
+    ],
+    "three_quarter": [
+      27,
+      56
+    ],
+    "side": [
+      25,
+      56
+    ],
+    "back": [
+      32,
+      56
+    ]
+  },
+  "colors": 24
+}

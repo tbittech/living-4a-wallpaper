@@ -5,6 +5,8 @@ theme.json -> scene.grid:
     u, v    paso en píxeles al avanzar una casilla en a (abajo-izquierda) y en b (abajo-derecha)
 scene.tiles: casillas caminables, por fila {"a": [[b0, b1], ...]} (b1 incluido)
 scene.places: {"lugar": {"tile": [a, b], "facing": "down_right", "offset": [dx, dy] opcional}}
+scene.facings (opcional): reemplaza FACINGS, {"dirección": {"step": [da, db], "view": "...", "flip": bool}}.
+    Sirve para escenarios de costado (la van), donde a es la profundidad y b va de izquierda a derecha.
 
 Se camina de casilla en casilla por los dos ejes del piso (4 direcciones de pantalla).
 """
@@ -28,6 +30,7 @@ class IsoGrid:
         self.u = np.array(g["u"], float)
         self.v = np.array(g["v"], float)
         self.inv = np.linalg.inv(np.column_stack([self.u, self.v]))
+        self.facings = facings_of(scene)
         self.walkable = {(int(a), b) for a, runs in (scene.get("tiles") or {}).items()
                          for b0, b1 in runs for b in range(b0, b1 + 1)}
 
@@ -62,7 +65,7 @@ class IsoGrid:
                     out.append(cur)
                     cur = prev[cur]
                 return out[::-1]
-            for (da, db), _, _ in FACINGS.values():
+            for (da, db), _, _ in self.facings.values():
                 nxt = (cur[0] + da, cur[1] + db)
                 if nxt not in prev and (nxt in free or nxt == goal):
                     prev[nxt] = cur
@@ -70,9 +73,17 @@ class IsoGrid:
         return None
 
 
-def facing_of(step):
+def facings_of(scene):
+    """Direcciones del tema: scene.facings o, si no tiene, las isométricas de FACINGS."""
+    f = scene.get("facings")
+    if not f:
+        return FACINGS
+    return {k: (tuple(v["step"]), v["view"], bool(v["flip"])) for k, v in f.items() if not k.startswith("_")}
+
+
+def facing_of(step, facings=FACINGS):
     """Dirección de pantalla de un paso (da, db) entre casillas vecinas."""
-    for name, (d, _, _) in FACINGS.items():
+    for name, (d, _, _) in facings.items():
         if d == tuple(step):
             return name
     raise ValueError(f"paso no válido: {step}")
