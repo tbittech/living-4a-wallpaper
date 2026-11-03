@@ -23,7 +23,7 @@ Preguntale al usuario dónde lo quiere (por defecto `%USERPROFILE%\living-4a`). 
 git clone https://github.com/tbittech/living-4a-wallpaper.git "$env:USERPROFILE\living-4a"
 cd "$env:USERPROFILE\living-4a"
 ```
-El tema de Breaking Bad está en la rama `breaking-bad-van` hasta que se una a `main`. Si `main` no tiene `wallpaper/public/bundle/breaking_bad/`, cambiá de rama con `git checkout breaking-bad-van`.
+Los dos temas (Big Bang y Breaking Bad) vienen en `main`.
 
 ### 3. Elegir el tema
 `wallpaper/public/config.json` → `"theme"`:
